@@ -22,7 +22,7 @@ RadialSprite::~RadialSprite() {
 
 void RadialSprite::initOptions() {
     initializeVertices();
-    updateVertices();
+    setProgress(1.0f);
 }
 
 float RadialSprite::getProgress() const {
@@ -72,6 +72,20 @@ void RadialSprite::updateVertices() {
 
     const int CIRCULAR_VERTICES = 9;
     const float DEGREES_INTERVAL = 45.0f;
+    
+    /*
+     * Calculate the triangleID based on the current progress value [0, 1].
+     * Every triangle is created at an interval of 45 degrees with the ID
+     * starting at 1. This means that 0-45 degrees is triangle 1, 45-90 is
+     * triangle 2, etc.
+     *
+     * The progress value is the normalized degrees value.
+     * To calculate the ID based on the progress value, the formula is used:
+     * triangleID = (int) progress * TOTAL_TRIANGLES
+     * TOTAL_TRIANGLES is 360 degrees divided by the interval in which triangles
+     * are created.
+     */
+    int triangleID = (int) (progress * (360 / DEGREES_INTERVAL)) + 1;
 
     /*
      * Create a triangle every 45 degrees moving counter-clockwise.
@@ -80,8 +94,17 @@ void RadialSprite::updateVertices() {
      */
     for (int i = 0; i < CIRCULAR_VERTICES; i++) {
         float degrees = i * DEGREES_INTERVAL;
+ 
+        // Adjust the vertex position if the given degrees is within the range
+        // of the triangle
+        if (i == triangleID) {
+           degrees = progress * 360.0f; 
+        }
+
         // Offset to make 0 degrees point upwards
         degrees -= 90.0f;
+
+
         float radians = MATH_DEG_TO_RAD(degrees);
 
         // Calculate the position of the edge of a given angle of the circle
@@ -108,6 +131,8 @@ void RadialSprite::updateVertices() {
         triangles.verts[i].texCoords.v = v;
     }
 
+    // Set the amount of triangles to display based on the progress
+    triangles.indexCount = 3 * triangleID;
     polygonInfo.setTriangles(triangles);
 
     setPolygonInfo(polygonInfo);
