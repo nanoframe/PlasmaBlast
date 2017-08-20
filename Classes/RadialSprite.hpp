@@ -3,6 +3,12 @@
 
 #include "cocos2d.h"
 
+/**
+ * A class for displaying a Sprite as a radial progress bar.
+ *
+ * It is required to add some padding to the images to prevent the edges of the
+ * image from being clipped.
+ */
 class RadialSprite : public cocos2d::Sprite {
 public:
     static RadialSprite* create(const std::string &filename);
@@ -11,7 +17,18 @@ public:
      
     void initOptions();
 
+    /**
+     * Returns the current progress displayed by the Sprite.
+     *
+     * @return  the current progress
+     */
     float getProgress() const;
+
+    /**
+     * Sets and updates the progress of the radial progress bar.
+     *
+     * @param newProgress  the progress to display between [0, 1]
+     */
     void setProgress(float newProgress);
 
 private:
