@@ -2,6 +2,7 @@
 #define GameScene_hpp
 
 #include "cocos2d.h"
+#include "HealthBar.hpp"
 
 class GameScene : public cocos2d::LayerColor {
 public:
@@ -13,6 +14,7 @@ public:
     CREATE_FUNC(GameScene);
 
 private:
+    HealthBar *health;
 };
 
 #endif // GameScene_hpp
