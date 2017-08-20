@@ -15,13 +15,27 @@ RadialSprite* RadialSprite::create(const std::string &filename) {
     return nullptr;
 }
 
+RadialSprite::RadialSprite() {
+    initializeVertices();
+}
+
 RadialSprite::~RadialSprite() {
     delete[] triangles.verts;
     delete[] triangles.indices;
 }
 
 void RadialSprite::initOptions() {
-    initializeVertices();
+    // Now that the Sprite is initialized with an image, the size of the image
+    // will be used to calculate the center vertex
+    auto spriteSize = getContentSize();
+    int endIndex = triangles.vertCount - 1;
+    triangles.verts[endIndex].vertices.x = spriteSize.width / 2.0f;
+    triangles.verts[endIndex].vertices.y = spriteSize.height / 2.0f;
+    triangles.verts[endIndex].vertices.z = 0.0f;
+    triangles.verts[endIndex].texCoords.u = 0.5f;
+    triangles.verts[endIndex].texCoords.v = 0.5f;
+    triangles.verts[endIndex].colors = Color4B::WHITE;
+
     setProgress(1.0f);
 }
 
@@ -39,8 +53,6 @@ void RadialSprite::setProgress(float newProgress) {
 }
 
 void RadialSprite::initializeVertices() {
-    auto spriteSize = getContentSize();    
-
     const int CIRCULAR_VERTICES = 9;
 
     triangles.vertCount = CIRCULAR_VERTICES + 1; // Include the center
@@ -50,14 +62,7 @@ void RadialSprite::initializeVertices() {
        triangles.verts[i].colors = Color4B::WHITE;
     }
 
-    // Create the last vertices in the center of the Sprite
     int endIndex = triangles.vertCount - 1;
-    triangles.verts[endIndex].vertices.x = spriteSize.width / 2.0f;
-    triangles.verts[endIndex].vertices.y = spriteSize.height / 2.0f;
-    triangles.verts[endIndex].vertices.z = 0.0f;
-    triangles.verts[endIndex].texCoords.u = 0.5f;
-    triangles.verts[endIndex].texCoords.v = 0.5f;
-    triangles.verts[endIndex].colors = Color4B::WHITE;
 
     const int TRIANGLES_COUNT = 8;
     // 8 triangles where each triangle has 3 vertices
@@ -72,11 +77,11 @@ void RadialSprite::initializeVertices() {
 }
 
 void RadialSprite::updateVertices() {
-    auto spriteSize = getContentSize();    
+    auto spriteSize = getContentSize();
 
     const int CIRCULAR_VERTICES = 9;
     const float DEGREES_INTERVAL = 45.0f;
-    
+
     /*
      * Calculate the triangleID based on the current progress value [0, 1].
      * Every triangle is created at an interval of 45 degrees with the ID
@@ -98,11 +103,11 @@ void RadialSprite::updateVertices() {
      */
     for (int i = 0; i < CIRCULAR_VERTICES; i++) {
         float degrees = i * DEGREES_INTERVAL;
- 
+
         // Adjust the vertex position if the given degrees is within the range
         // of the triangle
         if (i == triangleID) {
-           degrees = progress * 360.0f; 
+           degrees = progress * 360.0f;
         }
 
         // Offset to make 0 degrees point upwards
@@ -130,7 +135,7 @@ void RadialSprite::updateVertices() {
         // Calculate the UV coordinates of the texture to draw
         float u = positionX / spriteSize.width;
         float v = 1 - (positionY / spriteSize.height); // y-down to y-up
-         
+
         triangles.verts[i].texCoords.u = u;
         triangles.verts[i].texCoords.v = v;
     }

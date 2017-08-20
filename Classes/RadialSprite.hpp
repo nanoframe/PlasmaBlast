@@ -13,8 +13,9 @@ class RadialSprite : public cocos2d::Sprite {
 public:
     static RadialSprite* create(const std::string &filename);
 
+    RadialSprite();
     ~RadialSprite();
-     
+
     void initOptions();
 
     /**
@@ -32,13 +33,17 @@ public:
     void setProgress(float newProgress);
 
 private:
-    float progress;
+    float progress = 1.0f;
 
     cocos2d::PolygonInfo polygonInfo;
     cocos2d::TrianglesCommand::Triangles triangles;
 
     Sprite *progressMask;
 
+    /**
+     * Generates an array of vertices and indices for use in displaying the
+     * radial progress.
+     */
     void initializeVertices();
     void updateVertices();
 };
