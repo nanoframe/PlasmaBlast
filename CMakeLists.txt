@@ -129,6 +129,7 @@ set(GAME_SRC
   Classes/AppDelegate.cpp
   Classes/GameScene.cpp
   Classes/HealthBar.cpp
+  Classes/HealthObject.cpp
   Classes/RadialSprite.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
@@ -137,6 +138,7 @@ set(GAME_HEADERS
   Classes/AppDelegate.h
   Classes/GameScene.hpp
   Classes/HealthBar.hpp
+  Classes/HealthObject.hpp
   Classes/RadialSprite.hpp
   ${PLATFORM_SPECIFIC_HEADERS}
 )
