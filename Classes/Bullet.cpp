@@ -23,8 +23,17 @@ float Bullet::getDamage() const {
     return bulletParams.damage;
 }
 
+bool Bullet::isDeactivated() const {
+    return deactivated;
+}
+
+void Bullet::deactivate() {
+    deactivated = true;
+}
+
 Bullet::Bullet(BulletParams params, Vec2 normalizedDirection)
     : bulletParams(params),
-      direction(normalizedDirection) {
+      direction(normalizedDirection),
+      deactivated(false) {
 }
 

@@ -17,11 +17,16 @@ public:
 
     float getDamage() const;
 
+    bool isDeactivated() const;
+    void deactivate();
+
 private:
     Bullet(BulletParams params, cocos2d::Vec2 normalizedDirection);
 
     BulletParams bulletParams;
     cocos2d::Vec2 direction;
+
+    bool deactivated;
 };
 
 #endif // Bullet_hpp
