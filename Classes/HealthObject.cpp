@@ -9,7 +9,8 @@ HealthObject::HealthObject(float maxObjectHealth)
 
 HealthObject::~HealthObject() {}
 
-void HealthObject::update(float delta, Node *bullet) {
+void HealthObject::update(float delta, Bullet *bullet) {
+    
 }
 
 float HealthObject::getHealth() const {

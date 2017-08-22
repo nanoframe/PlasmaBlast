@@ -2,13 +2,14 @@
 #define HealthObject_hpp
 
 #include "cocos2d.h"
+#include "Bullet.hpp"
 
 class HealthObject : public cocos2d::Sprite {
 public:
     HealthObject(float maxObjectHealth);
     ~HealthObject();
 
-    void update(float delta, cocos2d::Node *bullet);
+    void update(float delta, Bullet *bullet);
 
     virtual void updateItem(float delta) = 0;
     virtual void onDestroyItem() = 0;
