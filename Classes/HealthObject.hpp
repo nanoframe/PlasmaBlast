@@ -14,6 +14,9 @@ public:
     virtual void updateItem(float delta) = 0;
     virtual void onDestroyItem() = 0;
 
+    void setupHealthBar();
+    void showHealthPopup(float duration = 2.0f);
+
     float getHealth() const;
     void setHealth(float newHealth);
 
@@ -21,6 +24,9 @@ public:
     void setIsActive(bool state);
 
 private:
+    cocos2d::Sprite *healthFrame;
+    cocos2d::Sprite *healthBar;
+
     float health;
     const float maxHealth;
 
