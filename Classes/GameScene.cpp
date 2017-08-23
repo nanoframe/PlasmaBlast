@@ -16,6 +16,8 @@ bool GameScene::init() {
 
     auto screenSize = Director::getInstance()->getVisibleSize();
 
+    screenBounds = Rect(Vec2::ZERO, screenSize);
+
     health = HealthBar::create();
     health->setPosition(screenSize / 2.0f);
     addChild(health);
@@ -32,6 +34,10 @@ void GameScene::update(float delta) {
     for (Bullet *bullet : bullets) {
         bullet->update(delta);
         updateComponents(delta, bullet);
+
+        // Discard bullets off-screen
+        if (!bullet->getBoundingBox().intersectsRect(screenBounds))
+            bullet->deactivate();
 
         // Remove bullets that have made impact
         if (bullet->isDeactivated()) deactivatedBullets.pushBack(bullet);
@@ -61,6 +67,5 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
     for (HealthObject* discarded : discardedComponents) {
         objects.eraseObject(discarded);
     }
-
 }
 

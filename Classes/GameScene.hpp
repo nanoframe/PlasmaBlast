@@ -19,6 +19,8 @@ public:
     CREATE_FUNC(GameScene);
 
 private:
+    cocos2d::Rect screenBounds;
+
     HealthBar *health;
 
     cocos2d::Vector<Bullet*> bullets;
