@@ -12,17 +12,17 @@ Scene* GameScene::createScene() {
 }
 
 bool GameScene::init() {
-   if (!LayerColor::initWithColor(Color4B(25, 25, 25, 255))) return false;
+    if (!LayerColor::initWithColor(Color4B(25, 25, 25, 255))) return false;
 
-   auto screenSize = Director::getInstance()->getVisibleSize();
+    auto screenSize = Director::getInstance()->getVisibleSize();
 
-   health = HealthBar::create();
-   health->setPosition(screenSize / 2.0f);
-   addChild(health);
+    health = HealthBar::create();
+    health->setPosition(screenSize / 2.0f);
+    addChild(health);
 
-   scheduleUpdate();
+    scheduleUpdate();
 
-   return true;
+    return true;
 }
 
 void GameScene::update(float delta) {
