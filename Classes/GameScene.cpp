@@ -26,9 +26,18 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
+    Vector<Bullet*> deactivatedBullets;
+
     for (Bullet *bullet : bullets) {
         bullet->update(delta);
         updateComponents(delta, bullet);
+
+        if (bullet->isDeactivated()) deactivatedBullets.pushBack(bullet);
+    }
+
+    for (Bullet *discarded : deactivatedBullets) {
+        bullets.eraseObject(discarded);
+        discarded->removeFromParentAndCleanup(true);
     }
 }
 
@@ -40,6 +49,9 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
         if (!object->isActive()) {
             discardedComponents.pushBack(object);
         }
+
+        // Avoid unneccessary object updates from a deactivated bullet
+        if (bullet->isDeactivated()) break;
     }
 
     // Remove unused objects
