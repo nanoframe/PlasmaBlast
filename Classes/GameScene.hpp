@@ -3,7 +3,9 @@
 
 #include "cocos2d.h"
 #include "HealthBar.hpp"
+
 #include "Bullet.hpp"
+#include "HealthObject.hpp"
 
 class GameScene : public cocos2d::LayerColor {
 public:
@@ -20,6 +22,7 @@ private:
     HealthBar *health;
 
     cocos2d::Vector<Bullet*> bullets;
+    cocos2d::Vector<HealthObject*> objects;
 };
 
 #endif // GameScene_hpp

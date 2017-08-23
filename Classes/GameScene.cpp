@@ -1,4 +1,5 @@
 #include "GameScene.hpp"
+#include "HealthObject.hpp"
 
 USING_NS_CC;
 
@@ -32,6 +33,19 @@ void GameScene::update(float delta) {
 }
 
 void GameScene::updateComponents(float delta, Bullet *bullet) {
-    
+    Vector<HealthObject*> discardedComponents;
+
+    for (HealthObject *object : objects) {
+        object->update(delta, bullet);
+        if (!object->isActive()) {
+            discardedComponents.pushBack(object);
+        }
+    }
+
+    // Remove unused objects
+    for (HealthObject* discarded : discardedComponents) {
+        objects.eraseObject(discarded);
+    }
+
 }
 
