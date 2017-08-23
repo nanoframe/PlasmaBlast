@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "HealthBar.hpp"
+#include "Bullet.hpp"
 
 class GameScene : public cocos2d::LayerColor {
 public:
@@ -11,10 +12,14 @@ public:
     virtual bool init();
     virtual void update(float delta);
 
+    void updateComponents(float delta, Bullet *bullet);
+
     CREATE_FUNC(GameScene);
 
 private:
     HealthBar *health;
+
+    cocos2d::Vector<Bullet*> bullets;
 };
 
 #endif // GameScene_hpp

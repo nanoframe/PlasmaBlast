@@ -25,5 +25,13 @@ bool GameScene::init() {
 }
 
 void GameScene::update(float delta) {
+    for (Bullet *bullet : bullets) {
+        bullet->update(delta);
+        updateComponents(delta, bullet);
+    }
+}
+
+void GameScene::updateComponents(float delta, Bullet *bullet) {
+    
 }
 
