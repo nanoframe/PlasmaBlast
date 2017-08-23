@@ -28,10 +28,12 @@ bool GameScene::init() {
 void GameScene::update(float delta) {
     Vector<Bullet*> deactivatedBullets;
 
+    // Update all of the game objects from every bullet in the game
     for (Bullet *bullet : bullets) {
         bullet->update(delta);
         updateComponents(delta, bullet);
 
+        // Remove bullets that have made impact
         if (bullet->isDeactivated()) deactivatedBullets.pushBack(bullet);
     }
 
@@ -46,6 +48,7 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
 
     for (HealthObject *object : objects) {
         object->update(delta, bullet);
+
         if (!object->isActive()) {
             discardedComponents.pushBack(object);
         }
