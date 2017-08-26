@@ -1,5 +1,4 @@
 #include "GameScene.hpp"
-#include "HealthObject.hpp"
 
 USING_NS_CC;
 
