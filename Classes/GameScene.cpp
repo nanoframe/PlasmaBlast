@@ -1,4 +1,5 @@
 #include "GameScene.hpp"
+#include "GameEventListener.hpp"
 
 USING_NS_CC;
 
@@ -20,6 +21,8 @@ bool GameScene::init() {
     health = HealthBar::create();
     health->setPosition(screenSize / 2.0f);
     addChild(health);
+
+    setupTouchListener();
 
     scheduleUpdate();
 
@@ -66,5 +69,11 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
     for (HealthObject* discarded : discardedComponents) {
         objects.eraseObject(discarded);
     }
+}
+
+void GameScene::setupTouchListener() {
+    GameEventListener *eventListener = GameEventListener::create();
+    getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener,
+                                                                 this);
 }
 

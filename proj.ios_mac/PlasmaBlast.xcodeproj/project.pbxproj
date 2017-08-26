@@ -37,6 +37,8 @@
 		4C1305D31F521BA600DF504A /* ring-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1305C91F521BA600DF504A /* ring-outline.png */; };
 		4C4126D81F3F992500034768 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4126D71F3F992500034768 /* libcocos2d iOS.a */; };
 		4C4126DA1F3F993A00034768 /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4126D91F3F993A00034768 /* libcocos2d Mac.a */; };
+		4CD6AD101F5264B300FCA656 /* GameEventListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */; };
+		4CD6AD111F5264B300FCA656 /* GameEventListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -110,6 +112,8 @@
 		4C1305C91F521BA600DF504A /* ring-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ring-outline.png"; sourceTree = "<group>"; };
 		4C4126D71F3F992500034768 /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/ios/libcocos2d iOS.a"; sourceTree = "<group>"; };
 		4C4126D91F3F993A00034768 /* libcocos2d Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d Mac.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/mac/libcocos2d Mac.a"; sourceTree = "<group>"; };
+		4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameEventListener.cpp; sourceTree = "<group>"; };
+		4CD6AD0F1F5264B300FCA656 /* GameEventListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEventListener.hpp; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -283,10 +287,14 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
+				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				4C1305AD1F521B9600DF504A /* Bullet.cpp */,
 				4C1305AE1F521B9600DF504A /* Bullet.hpp */,
 				4C1305AF1F521B9600DF504A /* Enemy.cpp */,
 				4C1305B01F521B9600DF504A /* Enemy.hpp */,
+				4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */,
+				4CD6AD0F1F5264B300FCA656 /* GameEventListener.hpp */,
 				4C1305B11F521B9600DF504A /* GameScene.cpp */,
 				4C1305B21F521B9600DF504A /* GameScene.hpp */,
 				4C1305B31F521B9600DF504A /* HealthBar.cpp */,
@@ -295,8 +303,6 @@
 				4C1305B61F521B9600DF504A /* HealthObject.hpp */,
 				4C1305B71F521B9600DF504A /* RadialSprite.cpp */,
 				4C1305B81F521B9600DF504A /* RadialSprite.hpp */,
-				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
-				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -471,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1305BB1F521B9600DF504A /* Enemy.cpp in Sources */,
+				4CD6AD101F5264B300FCA656 /* GameEventListener.cpp in Sources */,
 				4C1305BF1F521B9600DF504A /* HealthBar.cpp in Sources */,
 				4C1305B91F521B9600DF504A /* Bullet.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
@@ -494,6 +501,7 @@
 				4C1305BA1F521B9600DF504A /* Bullet.cpp in Sources */,
 				4C1305C41F521B9600DF504A /* RadialSprite.cpp in Sources */,
 				4C1305C21F521B9600DF504A /* HealthObject.cpp in Sources */,
+				4CD6AD111F5264B300FCA656 /* GameEventListener.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

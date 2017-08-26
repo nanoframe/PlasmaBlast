@@ -25,6 +25,8 @@ private:
 
     cocos2d::Vector<Bullet*> bullets;
     cocos2d::Vector<HealthObject*> objects;
+
+    void setupTouchListener();
 };
 
 #endif // GameScene_hpp
