@@ -41,7 +41,7 @@ float GameEventListener::getBulletInterval() const {
     return bulletInterval;
 }
 
-Vec2 GameEventListener::getBulletDirection() const {
+const Vec2 GameEventListener::getBulletDirection() const {
     auto touchDelta = touchLocation -
                       Vec2(Director::getInstance()->getVisibleSize() / 2.0f);
 

@@ -45,13 +45,13 @@ public:
 
     /**
      * Returns the normalized direction of the bullet.
-     * 
+     *
      * The bullet's direction is based on the touch location subtracted by the
      * center position of the game.
      *
      * @return  The normalized direction
      */
-    cocos2d::Vec2 getBulletDirection() const;
+    const cocos2d::Vec2 getBulletDirection() const;
 
     // Touch event listeners
     bool touchBegan(cocos2d::Touch *touch, cocos2d::Event *unused);
