@@ -82,8 +82,17 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
 }
 
 Bullet* GameScene::createBullet(const Vec2 direction) {
-    Bullet *bullet = Bullet::create(normalBullet, direction);
-    bullet->setPosition(Director::getInstance()->getVisibleSize() / 2.0f);
+    // Define the BulletParams for future implementation on multiple types
+    Bullet::BulletParams &params = normalBullet;
+
+    // Calculate the offset to spawn bullets at the edge of the health ring
+    float healthRadius = health->getContentSize().width / 2.0f;
+    Vec2 offsetPosition = direction * healthRadius;
+    Vec2 spawnPosition = Director::getInstance()->getVisibleSize() / 2.0f;
+    spawnPosition += offsetPosition;
+
+    Bullet *bullet = Bullet::create(params, direction);
+    bullet->setPosition(spawnPosition);
 
     return bullet;
 }
