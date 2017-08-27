@@ -26,10 +26,13 @@ public:
      */
     void setHealth(float value);
 
+    virtual cocos2d::Rect getBoundingBox();
+    virtual const cocos2d::Size& getContentSize();
+
 private:
     const float MAX_HEALTH = 100;
     float health = 0; // Between [0, MAX_HEALTH]
-    
+
     RadialSprite *healthDisplay;
     cocos2d::Sprite *outline;
     cocos2d::Sprite *outlineGlow;

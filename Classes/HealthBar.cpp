@@ -35,3 +35,11 @@ void HealthBar::setHealth(float value) {
     healthDisplay->setProgress(health / MAX_HEALTH);
 }
 
+Rect HealthBar::getBoundingBox() {
+    return outline->getBoundingBox();
+}
+
+const Size& HealthBar::getContentSize() {
+    return outline->getContentSize();
+}
+
