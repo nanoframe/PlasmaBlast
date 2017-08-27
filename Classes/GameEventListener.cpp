@@ -16,6 +16,8 @@ GameEventListener* GameEventListener::create() {
 
 bool GameEventListener::initListener() {
     if (!EventListenerTouchOneByOne::init()) return false;
+
+    // Initialize event listeners
     onTouchBegan = CC_CALLBACK_2(GameEventListener::touchBegan, this);
     onTouchMoved = CC_CALLBACK_2(GameEventListener::touchMoved, this);
     onTouchEnded = CC_CALLBACK_2(GameEventListener::touchEnded, this);
@@ -42,10 +44,10 @@ float GameEventListener::getBulletInterval() const {
 Vec2 GameEventListener::getBulletDirection() const {
     auto touchDelta = touchLocation -
                       Vec2(Director::getInstance()->getVisibleSize() / 2.0f);
-    
+
     // Avoid division-by-0 if normalizing a zero vector
     if (touchDelta == Vec2::ZERO) return Vec2(0.0f, 1.0f);
-    
+
     return touchDelta.getNormalized();
 }
 
