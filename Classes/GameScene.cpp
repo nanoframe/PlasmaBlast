@@ -107,6 +107,6 @@ void GameScene::setupTouchListener() {
 void GameScene::createBulletParams() {
     // Scale, velocity, damage
 
-    normalBullet = {1.0f, 50.0f, 10.0f};
+    normalBullet = {1.0f, 110.0f, 10.0f};
 }
 
