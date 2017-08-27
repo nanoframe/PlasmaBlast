@@ -2,6 +2,7 @@
 #define GameScene_hpp
 
 #include "cocos2d.h"
+#include "GameEventListener.hpp"
 #include "HealthBar.hpp"
 
 #include "Bullet.hpp"
@@ -19,6 +20,8 @@ public:
     CREATE_FUNC(GameScene);
 
 private:
+    GameEventListener *eventListener;
+
     cocos2d::Rect screenBounds;
 
     HealthBar *health;

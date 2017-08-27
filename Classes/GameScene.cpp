@@ -1,5 +1,4 @@
 #include "GameScene.hpp"
-#include "GameEventListener.hpp"
 
 USING_NS_CC;
 
@@ -72,8 +71,9 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
 }
 
 void GameScene::setupTouchListener() {
-    GameEventListener *eventListener = GameEventListener::create();
+    eventListener = GameEventListener::create();
     getEventDispatcher()->addEventListenerWithSceneGraphPriority(eventListener,
                                                                  this);
+    eventListener->setBulletInterval(1.0f / 8.0f);
 }
 
