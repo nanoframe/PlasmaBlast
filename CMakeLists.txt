@@ -129,6 +129,7 @@ set(GAME_SRC
   Classes/AppDelegate.cpp
   Classes/Bullet.cpp
   Classes/Enemy.cpp
+  Classes/GameEventListener.cpp
   Classes/GameScene.cpp
   Classes/HealthBar.cpp
   Classes/HealthObject.cpp
@@ -140,6 +141,7 @@ set(GAME_HEADERS
   Classes/AppDelegate.h
   Classes/Bullet.hpp
   Classes/Enemy.hpp
+  Classes/GameEventListener.hpp
   Classes/GameScene.hpp
   Classes/HealthBar.hpp
   Classes/HealthObject.hpp

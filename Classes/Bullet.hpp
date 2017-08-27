@@ -11,7 +11,7 @@ public:
         float damage;
     };
 
-    static Bullet* create(BulletParams params, cocos2d::Vec2 direction);
+    static Bullet* create(BulletParams &params, cocos2d::Vec2 direction);
 
     void update(float delta);
 
@@ -21,9 +21,9 @@ public:
     void deactivate();
 
 private:
-    Bullet(BulletParams params, cocos2d::Vec2 normalizedDirection);
+    Bullet(BulletParams &params, cocos2d::Vec2 normalizedDirection);
 
-    BulletParams bulletParams;
+    BulletParams& bulletParams;
     cocos2d::Vec2 direction;
 
     bool deactivated;

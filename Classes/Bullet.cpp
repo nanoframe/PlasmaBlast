@@ -2,12 +2,19 @@
 
 USING_NS_CC;
 
-Bullet* Bullet::create(BulletParams params, Vec2 direction) {
+Bullet* Bullet::create(BulletParams &params, Vec2 direction) {
     auto bullet = new Bullet(params, direction);
 
-    // TODO: Add bullet Sprite
-    if (bullet->init()) {
+    if (bullet->initWithFile("bullet.png")) {
         bullet->autorelease();
+
+        // Calculate the bullet's rotation based on the direction
+        auto upVector = Vec2(0.0f, 1.0f);
+        float rotation = MATH_RAD_TO_DEG(acos(upVector.dot(direction)));
+        if (direction.x < 0) rotation = -rotation;
+
+        bullet->setRotation(rotation);
+
         return bullet;
     }
 
@@ -15,8 +22,9 @@ Bullet* Bullet::create(BulletParams params, Vec2 direction) {
     return nullptr;
 }
 
-// TODO: Implement bullet movement
 void Bullet::update(float delta) {
+    auto movementDelta = direction * bulletParams.velocity * delta;
+    setPosition(getPosition() + movementDelta);
 }
 
 float Bullet::getDamage() const {
@@ -31,7 +39,7 @@ void Bullet::deactivate() {
     deactivated = true;
 }
 
-Bullet::Bullet(BulletParams params, Vec2 normalizedDirection)
+Bullet::Bullet(BulletParams &params, Vec2 normalizedDirection)
     : bulletParams(params),
       direction(normalizedDirection),
       deactivated(false) {
