@@ -17,6 +17,8 @@ public:
 
     void updateComponents(float delta, Bullet *bullet);
 
+    Bullet* createBullet(const cocos2d::Vec2 direction);
+
     CREATE_FUNC(GameScene);
 
 private:
@@ -29,7 +31,10 @@ private:
     cocos2d::Vector<Bullet*> bullets;
     cocos2d::Vector<HealthObject*> objects;
 
+    Bullet::BulletParams normalBullet;
+
     void setupTouchListener();
+    void createBulletParams();
 };
 
 #endif // GameScene_hpp
