@@ -23,15 +23,49 @@ bool GameEventListener::initListener() {
     return true;
 }
 
+void GameEventListener::update(float delta) {
+    currentTime += delta;
+}
+
+bool GameEventListener::canSpawnBullet() {
+    return currentTime >= bulletInterval && isTouched;
+}
+
+void GameEventListener::resetSpawnTime() {
+    currentTime = 0.0f;
+}
+
+float GameEventListener::getBulletInterval() const {
+    return bulletInterval;
+}
+
+Vec2 GameEventListener::getBulletDirection() const {
+    auto touchDelta = touchLocation -
+                      Vec2(Director::getInstance()->getVisibleSize() / 2.0f);
+    
+    // Avoid division-by-0 if normalizing a zero vector
+    if (touchDelta == Vec2::ZERO) return Vec2(0.0f, 1.0f);
+    
+    return touchDelta.getNormalized();
+}
+
+void GameEventListener::setBulletInterval(float interval) {
+    bulletInterval = interval;
+}
+
 bool GameEventListener::touchBegan(Touch *touch, Event *unused) {
+    isTouched = true;
+    touchLocation = touch->getLocation();
+
     return true;
 }
 
 void GameEventListener::touchMoved(Touch *touch, Event *unused) {
-
+    touchLocation = touch->getLocation();
 }
 
 void GameEventListener::touchEnded(Touch *touch, Event *unused) {
-
+    isTouched = false;
 }
+
 
