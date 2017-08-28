@@ -59,6 +59,21 @@ void HealthObject::checkCollisions(Bullet *bullet) {
             setIsActive(false);
             onDestroyItem();
             return;
+        } else {
+            // Animate the bullet impact
+            const int IMPACT_ACTION_TAG = 2;
+            const float SCALE_START = 1.2f;
+            const float DURATION = 0.1f;
+
+            stopActionByTag(IMPACT_ACTION_TAG);
+            setScale(SCALE_START);
+
+            auto shrinkAction = EaseIn::create(ScaleTo::create(DURATION,
+                                                               1.0f),
+                                               2.5f);
+            shrinkAction->setTag(IMPACT_ACTION_TAG);
+            
+            runAction(shrinkAction);
         }
     }
 }
