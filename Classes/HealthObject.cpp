@@ -66,6 +66,9 @@ void HealthObject::checkCollisions(Bullet *bullet) {
 void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
     CCASSERT(healthFrame, "Call setupHealthBar() after initialization!");
 
+    // Apply the current health to the health bar
+    healthBar->setScaleX(health / maxHealth);
+
     const int HEALTH_ACTION_TAG = 1;
 
     healthFrame->stopActionByTag(HEALTH_ACTION_TAG);
@@ -87,9 +90,6 @@ float HealthObject::getHealth() const {
 
 void HealthObject::setHealth(float newHealth) {
     health = newHealth;
-
-    // Apply the current health to the health bar
-    healthBar->setScaleX(newHealth / maxHealth);
 }
 
 bool HealthObject::isActive() const {
