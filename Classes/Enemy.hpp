@@ -26,7 +26,7 @@ public:
     void setTarget(cocos2d::Vec2 targetPosition);
 
 private:
-    cocos2d::Vec2 target;
+    cocos2d::Vec2 target = cocos2d::Vec2::ZERO;
 };
 
 class AttackerEnemy : public Enemy {
