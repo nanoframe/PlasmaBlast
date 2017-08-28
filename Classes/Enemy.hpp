@@ -35,8 +35,13 @@ public:
 
     static AttackerEnemy* create(float maxHealth);
 
+    void initOptions();
+
     virtual void updateItem(float delta);
     virtual void onDestroyItem();
+
+private:
+    cocos2d::Sprite *glow;
 };
 
 #endif // Enemy_hpp

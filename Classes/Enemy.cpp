@@ -25,18 +25,21 @@ AttackerEnemy* AttackerEnemy::create(float maxHealth) {
 
     if (enemy->initWithFile("attacker.png")) {
         enemy->autorelease();
-        
-        enemy->setupHealthBar();
 
-        auto glow = Sprite::create("attacker-glow.png");
-        glow->setPosition(enemy->getContentSize() / 2.0f);
-        enemy->addChild(glow);
-
+        enemy->initOptions();
         return enemy;
     }
 
     CC_SAFE_DELETE(enemy);
     return nullptr;
+}
+
+void AttackerEnemy::initOptions() {
+    setupHealthBar();
+
+    glow = Sprite::create("attacker-glow.png");
+    glow->setPosition(getContentSize() / 2.0f);
+    addChild(glow);
 }
 
 void AttackerEnemy::updateItem(float delta) {
@@ -54,5 +57,25 @@ void AttackerEnemy::updateItem(float delta) {
 }
 
 void AttackerEnemy::onDestroyItem() {
+    glow->removeFromParentAndCleanup(true);
+
+    const float ACTION_DURATION = 1.2f;
+    const float MAX_MOVEMENT = 20.0f;
+    Vec2 movement = Vec2(random<float>(-MAX_MOVEMENT, MAX_MOVEMENT),
+                         random<float>(-MAX_MOVEMENT, MAX_MOVEMENT));
+
+    auto rotateAction = RotateBy::create(ACTION_DURATION,
+                                         random<float>(180.0f, 540.0f));
+    auto moveAction = MoveBy::create(ACTION_DURATION, movement);
+    auto destroyAction = Spawn::create(EaseOut::create(rotateAction, 2.0f),
+                                       EaseOut::create(moveAction, 2.0f),
+                                       nullptr);
+    auto fullAction = Sequence::create(destroyAction,
+                                       DelayTime::create(0.4f),
+                                       CallFunc::create([this]() {
+                                           removeFromParentAndCleanup(true);
+                                       }),
+                                       nullptr);
+    runAction(fullAction);
 }
 
