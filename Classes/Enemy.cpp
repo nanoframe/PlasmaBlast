@@ -54,6 +54,5 @@ void AttackerEnemy::updateItem(float delta) {
 }
 
 void AttackerEnemy::onDestroyItem() {
-
 }
 

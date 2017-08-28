@@ -37,7 +37,6 @@ void HealthObject::setupHealthBar() {
     addChild(healthFrame);
 }
 
-// TODO: Add impact animations
 void HealthObject::update(float delta) {
     if (!active) return;
 
@@ -57,6 +56,7 @@ void HealthObject::checkCollisions(Bullet *bullet) {
         // Mark the object as inactive to be later disposed by the GameScene
         if (health <= 0) {
             setIsActive(false);
+            hideHealthPopup();
             onDestroyItem();
             return;
         } else {
@@ -84,8 +84,7 @@ void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
     // Apply the current health to the health bar
     healthBar->setScaleX(health / maxHealth);
 
-    healthFrame->stopActionByTag(HEALTH_ACTION_TAG);
-    healthBar->stopActionByTag(HEALTH_ACTION_TAG);
+    hideHealthPopup();
     healthFrame->setOpacity(255);
     healthBar->setOpacity(255);
 
