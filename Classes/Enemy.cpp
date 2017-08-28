@@ -25,6 +25,8 @@ AttackerEnemy* AttackerEnemy::create(float maxHealth) {
 
     if (enemy->initWithFile("attacker.png")) {
         enemy->autorelease();
+        
+        enemy->setupHealthBar();
 
         auto glow = Sprite::create("attacker-glow.png");
         glow->setPosition(enemy->getContentSize() / 2.0f);
@@ -38,7 +40,17 @@ AttackerEnemy* AttackerEnemy::create(float maxHealth) {
 }
 
 void AttackerEnemy::updateItem(float delta) {
+    // Velocity of the enemy moving towards the target
+    const float VELOCITY = 10.0f;
 
+    // Calculate the direction to move to towards the target
+
+    // Basic vector math
+    Vec2 movementDelta = -getPosition() + getTarget();
+    movementDelta.normalize();
+    movementDelta *= VELOCITY;
+
+    setPosition(getPosition() + movementDelta * delta);
 }
 
 void AttackerEnemy::onDestroyItem() {
