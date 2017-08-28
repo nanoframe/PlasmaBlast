@@ -45,6 +45,10 @@ private:
      * radial progress.
      */
     void initializeVertices();
+
+    /**
+     * Recalculate the indices and vertices of the Sprite.
+     */
     void updateVertices();
 };
 

@@ -13,7 +13,18 @@ public:
     virtual void updateItem(float delta) = 0;
     virtual void onDestroyItem() = 0;
 
+    /**
+     * Returns the target in which the enemy will try to attack to.
+     *
+     * @return  The Vec2 position of the target
+     */
     const cocos2d::Vec2& getTarget() const;
+
+    /**
+     * Sets the target for the enemy to attack to.
+     *
+     * @param targetPosition  The Vec2 position of the target
+     */
     void setTarget(cocos2d::Vec2 targetPosition);
 
 private:

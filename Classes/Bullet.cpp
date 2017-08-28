@@ -23,6 +23,7 @@ Bullet* Bullet::create(BulletParams &params, Vec2 direction) {
 }
 
 void Bullet::update(float delta) {
+    // Move the bullet
     auto movementDelta = direction * bulletParams.velocity * delta;
     setPosition(getPosition() + movementDelta);
 }
