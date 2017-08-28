@@ -72,7 +72,7 @@ void HealthObject::checkCollisions(Bullet *bullet) {
                                                                1.0f),
                                                2.5f);
             shrinkAction->setTag(IMPACT_ACTION_TAG);
-            
+
             runAction(shrinkAction);
         }
     }
@@ -83,8 +83,6 @@ void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
 
     // Apply the current health to the health bar
     healthBar->setScaleX(health / maxHealth);
-
-    const int HEALTH_ACTION_TAG = 1;
 
     healthFrame->stopActionByTag(HEALTH_ACTION_TAG);
     healthBar->stopActionByTag(HEALTH_ACTION_TAG);
@@ -97,6 +95,13 @@ void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
     removeAction->setTag(HEALTH_ACTION_TAG);
     healthFrame->runAction(removeAction);
     healthBar->runAction(removeAction->clone());
+}
+
+void HealthObject::hideHealthPopup() {
+    healthFrame->stopActionByTag(HEALTH_ACTION_TAG);
+    healthBar->stopActionByTag(HEALTH_ACTION_TAG);
+    healthFrame->setOpacity(0);
+    healthBar->setOpacity(0);
 }
 
 float HealthObject::getHealth() const {

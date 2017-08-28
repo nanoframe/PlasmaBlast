@@ -44,6 +44,11 @@ public:
     void showHealthPopup(float duration = 2.0f);
 
     /**
+     * Cancels all health UI actions and hides the health UI.
+     */
+    void hideHealthPopup();
+
+    /**
      * Return the object's current health.
      *
      * @return  The object's health
@@ -89,6 +94,9 @@ protected:
     void setupHealthBar();
 
 private:
+    // Action identifier for the health UI
+    const int HEALTH_ACTION_TAG = 1;
+
     cocos2d::Sprite *healthFrame;
     cocos2d::Sprite *healthBar;
 
