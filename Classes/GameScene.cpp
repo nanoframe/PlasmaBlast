@@ -23,6 +23,10 @@ bool GameScene::init() {
     health->setPosition(screenSize / 2.0f);
     addChild(health, 1);
 
+    bulletDirectionIndicator = Sprite::create("direction-indicator.png");
+    bulletDirectionIndicator->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    addChild(bulletDirectionIndicator, 1);
+
     setupTouchListener();
     createBulletParams();
 
@@ -98,6 +102,13 @@ Bullet* GameScene::createBullet(const Vec2 direction) {
 
     Bullet *bullet = Bullet::create(params, direction);
     bullet->setPosition(spawnPosition);
+
+    // Calculate the angle between the up vector and the direction
+    float dotProduct = Vec2(0.0f, 1.0f).dot(direction);
+    float angle = MATH_RAD_TO_DEG(acosf(dotProduct));
+    if (direction.x < 0) angle = -angle;
+    bulletDirectionIndicator->setRotation(angle);
+    bulletDirectionIndicator->setPosition(spawnPosition);
 
     return bullet;
 }

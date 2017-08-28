@@ -38,6 +38,7 @@ private:
     cocos2d::Rect screenBounds;
 
     HealthBar *health;
+    cocos2d::Sprite *bulletDirectionIndicator;
 
     cocos2d::Vector<Bullet*> bullets;
     cocos2d::Vector<HealthObject*> objects;
