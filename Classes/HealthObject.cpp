@@ -38,9 +38,13 @@ void HealthObject::setupHealthBar() {
 }
 
 // TODO: Add impact animations
-void HealthObject::update(float delta, Bullet *bullet) {
+void HealthObject::update(float delta) {
     if (!active) return;
 
+    updateItem(delta);
+}
+
+void HealthObject::checkCollisions(Bullet *bullet) {
     // Deduct the object's health if the object is hit by a bullet
     if (getBoundingBox().intersectsRect(bullet->getBoundingBox())) {
 
@@ -57,8 +61,6 @@ void HealthObject::update(float delta, Bullet *bullet) {
             return;
         }
     }
-
-    updateItem(delta);
 }
 
 void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {

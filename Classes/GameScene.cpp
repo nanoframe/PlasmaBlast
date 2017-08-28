@@ -1,5 +1,7 @@
 #include "GameScene.hpp"
 
+#include "Enemy.hpp"
+
 USING_NS_CC;
 
 Scene* GameScene::createScene() {
@@ -40,9 +42,13 @@ void GameScene::update(float delta) {
         addChild(bullet, 0);
     }
 
-    // Bullet / game object updates
+    // Update every game object
+    for (HealthObject *object : objects) {
+        object->update(delta);
+    }
+
+    // Check for bullet collisions
     Vector<Bullet*> deactivatedBullets;
-    // Update all of the game objects from every bullet in the game
     for (Bullet *bullet : bullets) {
         bullet->update(delta);
         updateComponents(delta, bullet);
@@ -54,7 +60,6 @@ void GameScene::update(float delta) {
         // Remove bullets that have made impact
         if (bullet->isDeactivated()) deactivatedBullets.pushBack(bullet);
     }
-
     for (Bullet *discarded : deactivatedBullets) {
         bullets.eraseObject(discarded);
         discarded->removeFromParentAndCleanup(true);
@@ -65,7 +70,7 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
     Vector<HealthObject*> discardedComponents;
 
     for (HealthObject *object : objects) {
-        object->update(delta, bullet);
+        object->checkCollisions(bullet);
 
         if (!object->isActive()) {
             discardedComponents.pushBack(object);

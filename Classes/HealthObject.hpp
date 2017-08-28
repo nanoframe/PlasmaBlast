@@ -9,7 +9,14 @@ public:
     HealthObject(float maxObjectHealth);
     ~HealthObject();
 
-    void update(float delta, Bullet *bullet);
+    void update(float delta);
+
+    /**
+     * Checks if the object is colliding with a bullet.
+     *
+     * @param bullet  The bullet to check against
+     */
+    void checkCollisions(Bullet *bullet);
 
     /**
      * Updates the current game object.
