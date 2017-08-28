@@ -6,8 +6,6 @@
 
 class Enemy : public HealthObject {
 public:
-    static Enemy* create();
-
     Enemy(float maxHealth);
 
     virtual void updateItem(float delta) = 0;
@@ -29,6 +27,16 @@ public:
 
 private:
     cocos2d::Vec2 target;
+};
+
+class AttackerEnemy : public Enemy {
+public:
+    AttackerEnemy(float maxHealth);
+
+    static AttackerEnemy* create(float maxHealth);
+
+    virtual void updateItem(float delta);
+    virtual void onDestroyItem();
 };
 
 #endif // Enemy_hpp

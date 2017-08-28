@@ -39,6 +39,10 @@
 		4C4126DA1F3F993A00034768 /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4126D91F3F993A00034768 /* libcocos2d Mac.a */; };
 		4C6A84361F5362F500F40241 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A84351F5362F500F40241 /* bullet.png */; };
 		4C6A84371F5362F500F40241 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A84351F5362F500F40241 /* bullet.png */; };
+		4C6A950B1F53A6D900B40299 /* attacker-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A95091F53A6D900B40299 /* attacker-glow.png */; };
+		4C6A950C1F53A6D900B40299 /* attacker-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A95091F53A6D900B40299 /* attacker-glow.png */; };
+		4C6A950D1F53A6D900B40299 /* attacker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A950A1F53A6D900B40299 /* attacker.png */; };
+		4C6A950E1F53A6D900B40299 /* attacker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A950A1F53A6D900B40299 /* attacker.png */; };
 		4CD6AD101F5264B300FCA656 /* GameEventListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */; };
 		4CD6AD111F5264B300FCA656 /* GameEventListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
@@ -115,6 +119,8 @@
 		4C4126D71F3F992500034768 /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/ios/libcocos2d iOS.a"; sourceTree = "<group>"; };
 		4C4126D91F3F993A00034768 /* libcocos2d Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d Mac.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/mac/libcocos2d Mac.a"; sourceTree = "<group>"; };
 		4C6A84351F5362F500F40241 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		4C6A95091F53A6D900B40299 /* attacker-glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "attacker-glow.png"; sourceTree = "<group>"; };
+		4C6A950A1F53A6D900B40299 /* attacker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attacker.png; sourceTree = "<group>"; };
 		4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameEventListener.cpp; sourceTree = "<group>"; };
 		4CD6AD0F1F5264B300FCA656 /* GameEventListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEventListener.hpp; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
@@ -277,6 +283,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4C6A95091F53A6D900B40299 /* attacker-glow.png */,
+				4C6A950A1F53A6D900B40299 /* attacker.png */,
 				4C6A84351F5362F500F40241 /* bullet.png */,
 				4C1305C51F521BA600DF504A /* health-frame.png */,
 				4C1305C61F521BA600DF504A /* health-progress.png */,
@@ -450,6 +458,8 @@
 				4C6A84361F5362F500F40241 /* bullet.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				4C1305CE1F521BA600DF504A /* health-ring.png in Resources */,
+				4C6A950D1F53A6D900B40299 /* attacker.png in Resources */,
+				4C6A950B1F53A6D900B40299 /* attacker-glow.png in Resources */,
 				4C1305D21F521BA600DF504A /* ring-outline.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
@@ -466,10 +476,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1305D31F521BA600DF504A /* ring-outline.png in Resources */,
+				4C6A950C1F53A6D900B40299 /* attacker-glow.png in Resources */,
 				4C6A84371F5362F500F40241 /* bullet.png in Resources */,
 				4C1305CD1F521BA600DF504A /* health-progress.png in Resources */,
 				4C1305CF1F521BA600DF504A /* health-ring.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				4C6A950E1F53A6D900B40299 /* attacker.png in Resources */,
 				4C1305D11F521BA600DF504A /* ring-outline-glow.png in Resources */,
 				4C1305CB1F521BA600DF504A /* health-frame.png in Resources */,
 			);
