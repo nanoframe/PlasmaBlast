@@ -31,7 +31,7 @@ public:
 
 private:
     const float MAX_HEALTH = 100;
-    float health = 0; // Between [0, MAX_HEALTH]
+    float health = MAX_HEALTH; // Between [0, MAX_HEALTH]
 
     RadialSprite *healthDisplay;
     cocos2d::Sprite *outline;
