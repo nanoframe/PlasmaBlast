@@ -3,9 +3,14 @@
 USING_NS_CC;
 
 // Enemy implementation
-Enemy::Enemy(float maxHealth)
+Enemy::Enemy(float maxHealth, float enemyDamage)
     : HealthObject(maxHealth),
-      target(Circle()) {
+      target(Circle()),
+      damage(enemyDamage){
+}
+
+float Enemy::getDamage() const {
+    return damage;
 }
 
 const Circle& Enemy::getTarget() const {
@@ -18,7 +23,8 @@ void Enemy::setTarget(Circle& targetCircle) {
 
 // AttackerEnemy implementation
 
-AttackerEnemy::AttackerEnemy(float maxHealth) : Enemy(maxHealth) {}
+AttackerEnemy::AttackerEnemy(float maxHealth)
+    : Enemy(maxHealth, 5.0f) {}
 
 AttackerEnemy* AttackerEnemy::create(float maxHealth) {
     auto enemy = new AttackerEnemy(maxHealth);

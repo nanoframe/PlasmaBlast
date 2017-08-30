@@ -7,11 +7,18 @@
 
 class Enemy : public HealthObject {
 public:
-    Enemy(float maxHealth);
+    Enemy(float maxHealth, float enemyDamage);
 
     virtual void updateItem(float delta) = 0;
     virtual bool checkForTargetCollisions() = 0;
     virtual void onDestroyItem() = 0;
+
+    /**
+     * Returns the amount of health the enemy will deduct from the player.
+     *
+     * @return  The damage amount
+     */
+    float getDamage() const;
 
     /**
      * Returns the target in which the enemy will try to attack to.
@@ -29,6 +36,7 @@ public:
 
 private:
     Circle target;
+    float damage;
 };
 
 class AttackerEnemy : public Enemy {
