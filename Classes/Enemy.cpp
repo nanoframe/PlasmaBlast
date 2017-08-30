@@ -5,15 +5,15 @@ USING_NS_CC;
 // Enemy implementation
 Enemy::Enemy(float maxHealth)
     : HealthObject(maxHealth),
-      target(Vec2::ZERO) {
+      target(Circle()) {
 }
 
-const Vec2& Enemy::getTarget() const {
+const Circle& Enemy::getTarget() const {
     return target;
 }
 
-void Enemy::setTarget(Vec2 targetPosition) {
-    target = targetPosition;
+void Enemy::setTarget(Circle& targetCircle) {
+    target = targetCircle;
 }
 
 // AttackerEnemy implementation
@@ -49,11 +49,15 @@ void AttackerEnemy::updateItem(float delta) {
     // Calculate the direction to move to towards the target
 
     // Basic vector math
-    Vec2 movementDelta = -getPosition() + getTarget();
+    Vec2 movementDelta = -getPosition() + getTarget().getCenter();
     movementDelta.normalize();
     movementDelta *= VELOCITY;
 
     setPosition(getPosition() + movementDelta * delta);
+}
+
+bool AttackerEnemy::checkForTargetCollisions() {
+    return false;
 }
 
 void AttackerEnemy::onDestroyItem() {
