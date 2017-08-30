@@ -3,22 +3,28 @@
 USING_NS_CC;
 
 // Enemy implementation
-Enemy::Enemy(float maxHealth)
+Enemy::Enemy(float maxHealth, float enemyDamage)
     : HealthObject(maxHealth),
-      target(Vec2::ZERO) {
+      target(Circle()),
+      damage(enemyDamage){
 }
 
-const Vec2& Enemy::getTarget() const {
+float Enemy::getDamage() const {
+    return damage;
+}
+
+const Circle& Enemy::getTarget() const {
     return target;
 }
 
-void Enemy::setTarget(Vec2 targetPosition) {
-    target = targetPosition;
+void Enemy::setTarget(Circle& targetCircle) {
+    target = targetCircle;
 }
 
 // AttackerEnemy implementation
 
-AttackerEnemy::AttackerEnemy(float maxHealth) : Enemy(maxHealth) {}
+AttackerEnemy::AttackerEnemy(float maxHealth)
+    : Enemy(maxHealth, 5.0f) {}
 
 AttackerEnemy* AttackerEnemy::create(float maxHealth) {
     auto enemy = new AttackerEnemy(maxHealth);
@@ -49,11 +55,15 @@ void AttackerEnemy::updateItem(float delta) {
     // Calculate the direction to move to towards the target
 
     // Basic vector math
-    Vec2 movementDelta = -getPosition() + getTarget();
+    Vec2 movementDelta = -getPosition() + getTarget().getCenter();
     movementDelta.normalize();
     movementDelta *= VELOCITY;
 
     setPosition(getPosition() + movementDelta * delta);
+}
+
+bool AttackerEnemy::checkForTargetCollisions() {
+    return getTarget().intersectsRect(getBoundingBox());
 }
 
 void AttackerEnemy::onDestroyItem() {

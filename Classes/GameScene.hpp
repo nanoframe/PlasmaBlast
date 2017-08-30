@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "GameEventListener.hpp"
 #include "HealthBar.hpp"
+#include "Circle.hpp"
 
 #include "Bullet.hpp"
 #include "HealthObject.hpp"
@@ -36,6 +37,7 @@ private:
     GameEventListener *eventListener;
 
     cocos2d::Rect screenBounds;
+    Circle playerCircle;
 
     HealthBar *health;
     cocos2d::Sprite *bulletDirectionIndicator;

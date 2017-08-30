@@ -23,6 +23,9 @@ bool GameScene::init() {
     health->setPosition(screenSize / 2.0f);
     addChild(health, 1);
 
+    playerCircle = Circle(Vec2(screenSize / 2.0f),
+                          health->getContentSize().width / 2.0f);
+
     bulletDirectionIndicator = Sprite::create("direction-indicator.png");
     bulletDirectionIndicator->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
     addChild(bulletDirectionIndicator, 1);
@@ -46,9 +49,26 @@ void GameScene::update(float delta) {
         addChild(bullet, 0);
     }
 
+    Vector<HealthObject*> deactivatedObjects;
     // Update every game object
     for (HealthObject *object : objects) {
         object->update(delta);
+
+        // Object-specific updates
+        if (Enemy *enemy = dynamic_cast<Enemy*>(object)) {
+            // The enemy successfully attacked the player
+            if (enemy->checkForTargetCollisions()) {
+                // Deduct health
+                health->setHealth(health->getHealth() - enemy->getDamage());
+
+                enemy->removeFromParentAndCleanup(true);
+                deactivatedObjects.pushBack(enemy);
+            }
+        }
+    }
+    for (HealthObject *object : deactivatedObjects) {
+        objects.eraseObject(object);
+        object->removeFromParentAndCleanup(true);
     }
 
     // Check for bullet collisions
