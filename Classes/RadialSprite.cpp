@@ -46,7 +46,7 @@ float RadialSprite::getProgress() const {
 void RadialSprite::setProgress(float newProgress) {
     // Don't update if the new progress is the same as the current progress
     // (with floating-point errors taken into account)
-    if (abs(newProgress - progress) < 0.0001) return;
+    if (std::abs(newProgress - progress) < 0.0001) return;
 
     progress = newProgress;
     updateVertices();
