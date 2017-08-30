@@ -57,7 +57,7 @@ void AttackerEnemy::updateItem(float delta) {
 }
 
 bool AttackerEnemy::checkForTargetCollisions() {
-    return false;
+    return getTarget().intersectsRect(getBoundingBox());
 }
 
 void AttackerEnemy::onDestroyItem() {
