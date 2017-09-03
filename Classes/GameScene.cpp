@@ -60,10 +60,12 @@ void GameScene::update(float delta) {
             if (enemy->checkForTargetCollisions()) {
                 // Deduct health
                 health->setHealth(health->getHealth() - enemy->getDamage());
-
-                enemy->removeFromParentAndCleanup(true);
-                deactivatedObjects.pushBack(enemy);
             }
+        }
+
+        // Discard inactive objects
+        if (!object->isActive()) {
+            deactivatedObjects.pushBack(object);
         }
     }
     for (HealthObject *object : deactivatedObjects) {

@@ -63,7 +63,13 @@ void AttackerEnemy::updateItem(float delta) {
 }
 
 bool AttackerEnemy::checkForTargetCollisions() {
-    return getTarget().intersectsRect(getBoundingBox());
+    bool isColliding = getTarget().intersectsRect(getBoundingBox());
+    if (isColliding) {
+        // TODO: Implement impact animations
+        setIsActive(false);
+    }
+
+    return isColliding;
 }
 
 void AttackerEnemy::onDestroyItem() {
