@@ -54,13 +54,18 @@ void AttackerEnemy::updateItem(float delta) {
     // Velocity of the enemy moving towards the target
     const float VELOCITY = 10.0f;
 
-    // Calculate the direction to move to towards the target
-
-    // Basic vector math
+    // Calculate the direction of the enemy relative to the player
     Vec2 movementDelta = -getPosition() + getTarget().getCenter();
     movementDelta.normalize();
-    movementDelta *= VELOCITY;
 
+    // Calculate the rotation of the enemy
+    Vec2 upVector(0.0f, 1.0f);
+    float angle = MATH_RAD_TO_DEG(acosf(upVector.dot(movementDelta)));
+    if (movementDelta.x < 0) angle = -angle;
+    setRotation(angle);
+
+    // Move the enemy towards the player
+    movementDelta *= VELOCITY;
     setPosition(getPosition() + movementDelta * delta);
 }
 
@@ -74,6 +79,9 @@ bool AttackerEnemy::checkForTargetCollisions() {
         setTextureRect(Rect::ZERO);
         glow->removeFromParentAndCleanup(true);
         hideHealthPopup();
+
+        // Reset the rotation to spawn particles in the correct direction
+        setRotation(0.0f);
 
         spawnExplosionParticles();
 
