@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "Bullet.hpp"
 
-class HealthObject : public cocos2d::Sprite {
+class HealthObject : public cocos2d::Node {
 public:
     HealthObject(float maxObjectHealth);
     ~HealthObject();
@@ -85,18 +85,17 @@ public:
      */
     void setIsActive(bool state);
 
+    virtual const cocos2d::Size& getContentSize() const;
+    virtual cocos2d::Rect getBoundingBox() const;
+
 protected:
-    /**
-     * Initializes the health bar of the object.
-     *
-     * This method must be called before calling showHealthPopup(float).
-     */
-    void setupHealthBar();
+    void setObjectImage(std::string &filename);
 
 private:
     // Action identifier for the health UI
     const int HEALTH_ACTION_TAG = 1;
 
+    cocos2d::Sprite *objectImage;
     cocos2d::Sprite *healthFrame;
     cocos2d::Sprite *healthBar;
 
@@ -104,6 +103,13 @@ private:
     const float maxHealth;
 
     bool active;
+
+    /**
+     * Initializes the health bar of the object.
+     */
+    void createHealthBar();
+
+    void updateHealthBarPosition();
 };
 
 #endif

@@ -29,7 +29,7 @@ AttackerEnemy::AttackerEnemy(float maxHealth)
 AttackerEnemy* AttackerEnemy::create(float maxHealth) {
     auto enemy = new AttackerEnemy(maxHealth);
 
-    if (enemy->initWithFile("attacker.png")) {
+    if (enemy->init()) {
         enemy->autorelease();
 
         enemy->initOptions();
@@ -41,11 +41,12 @@ AttackerEnemy* AttackerEnemy::create(float maxHealth) {
 }
 
 void AttackerEnemy::initOptions() {
-    setupHealthBar();
-
+    image = Sprite::create("attacker.png");
     glow = Sprite::create("attacker-glow.png");
-    glow->setPosition(getContentSize() / 2.0f);
-    addChild(glow);
+    glow->setPosition(image->getContentSize() / 2.0f);
+
+    image->addChild(glow);
+    addChild(image);
 }
 
 void AttackerEnemy::updateItem(float delta) {
@@ -75,13 +76,11 @@ bool AttackerEnemy::checkForTargetCollisions() {
     bool isColliding = getTarget().intersectsRect(getBoundingBox());
     if (isColliding) {
         // Remove the enemy from the screen by hiding it
-        setTexture(nullptr);
-        setTextureRect(Rect::ZERO);
+        
         glow->removeFromParentAndCleanup(true);
         hideHealthPopup();
 
-        // Reset the rotation to spawn particles in the correct direction
-        setRotation(0.0f);
+        image->setVisible(false);
 
         spawnExplosionParticles();
 
