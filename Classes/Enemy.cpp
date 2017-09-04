@@ -81,10 +81,13 @@ bool AttackerEnemy::checkForTargetCollisions() {
         hideHealthPopup();
         getObjectImage()->setVisible(false);
 
+        // Disable bullet updates
+        setIsActive(false);
+
         spawnExplosionParticles();
 
         // Dispose after two seconds
-        scheduleOnce([this](float) { setIsActive(false); },
+        scheduleOnce([this](float) { removeFromParentAndCleanup(true); },
                      2.0f,
                      "cleanup");
 

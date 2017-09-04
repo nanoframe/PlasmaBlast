@@ -70,7 +70,6 @@ void GameScene::update(float delta) {
     }
     for (HealthObject *object : deactivatedObjects) {
         objects.eraseObject(object);
-        object->removeFromParentAndCleanup(true);
     }
 
     // Check for bullet collisions
