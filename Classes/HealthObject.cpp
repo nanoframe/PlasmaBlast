@@ -91,9 +91,11 @@ void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
     auto removeAction = Sequence::create(DelayTime::create(duration),
                                          FadeOut::create(1.5f),
                                          nullptr);
+    auto removeAction2 = removeAction->clone();
     removeAction->setTag(HEALTH_ACTION_TAG);
+    removeAction2->setTag(HEALTH_ACTION_TAG);
     healthFrame->runAction(removeAction);
-    healthBar->runAction(removeAction->clone());
+    healthBar->runAction(removeAction2);
 }
 
 void HealthObject::hideHealthPopup() {
