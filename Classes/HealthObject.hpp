@@ -88,8 +88,21 @@ public:
     virtual const cocos2d::Size& getContentSize() const;
     virtual cocos2d::Rect getBoundingBox() const;
 
+    /**
+     * Returns the Sprite of the HealthObject.
+     *
+     * @return  The Sprite of the object
+     */
     cocos2d::Sprite* getObjectImage() const;
 protected:
+    /**
+     * Sets the image of the HealthObject.
+     *
+     * Existing images will be removed from the object and will be
+     * automatically released.
+     *
+     * @param image  The new image
+     */
     void setObjectImage(cocos2d::Sprite *image);
 
 private:
@@ -110,6 +123,9 @@ private:
      */
     void createHealthBar();
 
+    /**
+     * Updates the position of the HealthBar based on the object image's size.
+     */
     void updateHealthBarPosition();
 };
 

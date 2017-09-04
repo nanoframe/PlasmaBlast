@@ -77,10 +77,8 @@ bool AttackerEnemy::checkForTargetCollisions() {
     bool isColliding = getTarget().intersectsRect(getBoundingBox());
     if (isColliding) {
         // Remove the enemy from the screen by hiding it
-        
         glow->removeFromParentAndCleanup(true);
         hideHealthPopup();
-
         getObjectImage()->setVisible(false);
 
         spawnExplosionParticles();
