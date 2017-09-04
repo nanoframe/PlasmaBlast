@@ -145,7 +145,7 @@ void HealthObject::updateHealthBarPosition() {
 
     auto objectSize = getContentSize();
 
-    healthFrame->setPosition(objectSize.width / 2.0f,
+    healthFrame->setPosition(0.0f,
                              objectSize.height + Y_SPACING);
     float healthBarX = healthFrame->getContentSize().width / 2.0f -
                        healthBar->getContentSize().width / 2.0f;
