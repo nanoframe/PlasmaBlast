@@ -51,8 +51,15 @@ public:
     virtual bool checkForTargetCollisions();
     virtual void onDestroyItem();
 
+
 private:
     cocos2d::Sprite *glow;
+    bool canUpdate = true;
+
+    /**
+     * Spawn explosion particles moving away from the target.
+     */
+    void spawnExplosionParticles();
 };
 
 #endif // Enemy_hpp

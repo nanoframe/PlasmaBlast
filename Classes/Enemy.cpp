@@ -49,6 +49,8 @@ void AttackerEnemy::initOptions() {
 }
 
 void AttackerEnemy::updateItem(float delta) {
+    if (!canUpdate) return;
+
     // Velocity of the enemy moving towards the target
     const float VELOCITY = 10.0f;
 
@@ -63,10 +65,24 @@ void AttackerEnemy::updateItem(float delta) {
 }
 
 bool AttackerEnemy::checkForTargetCollisions() {
+    if (!canUpdate) return false;
+
     bool isColliding = getTarget().intersectsRect(getBoundingBox());
     if (isColliding) {
-        // TODO: Implement impact animations
-        setIsActive(false);
+        // Remove the enemy from the screen by hiding it
+        setTexture(nullptr);
+        setTextureRect(Rect::ZERO);
+        glow->removeFromParentAndCleanup(true);
+        hideHealthPopup();
+
+        spawnExplosionParticles();
+
+        // Dispose after two seconds
+        scheduleOnce([this](float) { setIsActive(false); },
+                     2.0f,
+                     "cleanup");
+
+        canUpdate = false;
     }
 
     return isColliding;
@@ -93,5 +109,55 @@ void AttackerEnemy::onDestroyItem() {
                                        }),
                                        nullptr);
     runAction(fullAction);
+}
+
+void AttackerEnemy::spawnExplosionParticles() {
+    const float DISTANCE_MIN = 10.0f;
+    const float DISTANCE_MAX = 50.0f;
+    const float DURATION_MIN = 0.5f;
+    const float DURATION_MAX = 1.7f;
+    const float DIRECTION_OFFSET = 35.0f;
+    const int PARTICLE_COUNT = 30.0f;
+    const float SPAWN_OFFSET = 5.0f;
+
+    for (int i = 0; i < PARTICLE_COUNT; i++) {
+        // Spawn moving in a random direction
+        Vec2 direction = -getPosition() + getTarget().getCenter();
+        direction.negate();
+        direction.x += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
+        direction.y += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
+        direction.normalize();
+
+        // Random spawn position
+        Vec2 spawnPosition = Vec2(random<float>(-SPAWN_OFFSET,
+                                                SPAWN_OFFSET),
+                                  random<float>(-SPAWN_OFFSET,
+                                                SPAWN_OFFSET));
+
+        float duration = random<float>(DURATION_MIN, DURATION_MAX);
+
+        // Random distance
+        direction *= random<float>(DISTANCE_MIN,
+                                   DISTANCE_MAX);
+
+        // Create the particle
+        auto particle = Sprite::create("attacker-particle.png");
+        particle->setPosition(spawnPosition);
+        addChild(particle);
+
+        // Create particle actions
+        auto movementAction = MoveBy::create(duration,
+                                             direction);
+        auto fadeAction = FadeOut::create(0.5f);
+        auto disposeAction = CallFunc::create([particle]() {
+                particle->removeFromParentAndCleanup(true);
+        });
+        auto sequenceAction = Sequence::create(EaseOut::create(movementAction,
+                                                               2.0f),
+                                               fadeAction,
+                                               disposeAction,
+                                               nullptr);
+        particle->runAction(sequenceAction);
+    }
 }
 
