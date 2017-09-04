@@ -89,7 +89,7 @@ public:
     virtual cocos2d::Rect getBoundingBox() const;
 
 protected:
-    void setObjectImage(std::string &filename);
+    void setObjectImage(cocos2d::Sprite *image);
 
 private:
     // Action identifier for the health UI

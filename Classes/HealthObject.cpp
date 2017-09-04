@@ -10,6 +10,7 @@ HealthObject::HealthObject(float maxObjectHealth)
       maxHealth(maxObjectHealth),
       active(true) {
     CCASSERT(maxObjectHealth > 0, "Object's maximum health must be > 0!");
+    createHealthBar();
     addChild(objectImage);
 }
 
@@ -103,16 +104,24 @@ const Size& HealthObject::getContentSize() const {
 }
 
 Rect HealthObject::getBoundingBox() const {
-    return objectImage->getBoundingBox();
+    auto boundingBox = objectImage->getBoundingBox();
+    boundingBox.origin.x += getPositionX();
+    boundingBox.origin.y += getPositionY();
+
+    return boundingBox;
 }
 
-void HealthObject::setObjectImage(std::string &filename) {
+void HealthObject::setObjectImage(Sprite *image) {
     if (objectImage) {
         objectImage->removeFromParentAndCleanup(true);
-        objectImage->release();
+
+        // Autoreleased by cocos2d::Ref
+        // objectImage->release();
     }
 
-    objectImage = Sprite::create(filename);
+    objectImage = image;
+    addChild(objectImage);
+
     updateHealthBarPosition();
 }
 

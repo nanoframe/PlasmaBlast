@@ -46,7 +46,8 @@ void AttackerEnemy::initOptions() {
     glow->setPosition(image->getContentSize() / 2.0f);
 
     image->addChild(glow);
-    addChild(image);
+
+    setObjectImage(image);
 }
 
 void AttackerEnemy::updateItem(float delta) {
