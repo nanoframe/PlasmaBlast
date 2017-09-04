@@ -3,39 +3,18 @@
 USING_NS_CC;
 
 HealthObject::HealthObject(float maxObjectHealth)
-    : healthFrame(nullptr),
+    : objectImage(Sprite::create()),
+      healthFrame(nullptr),
       healthBar(nullptr),
       health(maxObjectHealth),
       maxHealth(maxObjectHealth),
       active(true) {
     CCASSERT(maxObjectHealth > 0, "Object's maximum health must be > 0!");
+    createHealthBar();
+    addChild(objectImage);
 }
 
 HealthObject::~HealthObject() {}
-
-void HealthObject::setupHealthBar() {
-    const float Y_SPACING = 5.0f;
-
-    // Create the object's health bar
-    healthFrame = Sprite::create("health-frame.png");
-    healthFrame->setPosition(getContentSize().width / 2.0f,
-                             getContentSize().height + Y_SPACING);
-
-    healthBar = Sprite::create("health-progress.png");
-    healthBar->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
-    // Center the health progress bar in the frame and anchor its left edge
-    float healthBarX = healthFrame->getContentSize().width / 2.0f -
-                       healthBar->getContentSize().width / 2.0f;
-    healthBar->setPosition(healthBarX,
-                            healthFrame->getContentSize().height / 2.0f);
-
-    // Start hidden
-    healthFrame->setOpacity(0);
-    healthBar->setOpacity(0);
-
-    healthFrame->addChild(healthBar);
-    addChild(healthFrame);
-}
 
 void HealthObject::update(float delta) {
     if (!active) return;
@@ -79,7 +58,6 @@ void HealthObject::checkCollisions(Bullet *bullet) {
 }
 
 void HealthObject::showHealthPopup(float duration /*= 2.0f*/) {
-    CCASSERT(healthFrame, "Call setupHealthBar() after initialization!");
 
     // Apply the current health to the health bar
     healthBar->setScaleX(health / maxHealth);
@@ -121,4 +99,63 @@ void HealthObject::setIsActive(bool state) {
     active = state;
 }
 
+const Size& HealthObject::getContentSize() const {
+    return objectImage->getContentSize();
+}
+
+Rect HealthObject::getBoundingBox() const {
+    auto boundingBox = objectImage->getBoundingBox();
+    boundingBox.origin.x += getPositionX();
+    boundingBox.origin.y += getPositionY();
+
+    return boundingBox;
+}
+
+Sprite* HealthObject::getObjectImage() const {
+    return objectImage;
+}
+
+void HealthObject::setObjectImage(Sprite *image) {
+    if (objectImage) {
+        objectImage->removeFromParentAndCleanup(true);
+
+        // Autoreleased by cocos2d::Ref
+        // objectImage->release();
+    }
+
+    objectImage = image;
+    addChild(objectImage);
+
+    updateHealthBarPosition();
+}
+
+void HealthObject::createHealthBar() {
+    // Create the object's health bar
+    healthFrame = Sprite::create("health-frame.png");
+    healthBar = Sprite::create("health-progress.png");
+    healthBar->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
+    // Center the health progress bar in the frame and anchor its left edge
+    
+    // Start hidden
+    healthFrame->setOpacity(0);
+    healthBar->setOpacity(0);
+
+    healthFrame->addChild(healthBar);
+    addChild(healthFrame);
+}
+
+void HealthObject::updateHealthBarPosition() {
+    const float Y_SPACING = 5.0f;
+
+    auto objectSize = getContentSize();
+
+    healthFrame->setPosition(0.0f,
+                             objectSize.height + Y_SPACING);
+    float healthBarX = healthFrame->getContentSize().width / 2.0f -
+                       healthBar->getContentSize().width / 2.0f;
+    healthBar->setPosition(healthBarX,
+                            healthFrame->getContentSize().height / 2.0f);
+
+
+}
 
