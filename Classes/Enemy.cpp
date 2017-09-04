@@ -41,7 +41,7 @@ AttackerEnemy* AttackerEnemy::create(float maxHealth) {
 }
 
 void AttackerEnemy::initOptions() {
-    image = Sprite::create("attacker.png");
+    auto image = Sprite::create("attacker.png");
     glow = Sprite::create("attacker-glow.png");
     glow->setPosition(image->getContentSize() / 2.0f);
 
@@ -64,7 +64,7 @@ void AttackerEnemy::updateItem(float delta) {
     Vec2 upVector(0.0f, 1.0f);
     float angle = MATH_RAD_TO_DEG(acosf(upVector.dot(movementDelta)));
     if (movementDelta.x < 0) angle = -angle;
-    setRotation(angle);
+    getObjectImage()->setRotation(angle);
 
     // Move the enemy towards the player
     movementDelta *= VELOCITY;
@@ -81,7 +81,7 @@ bool AttackerEnemy::checkForTargetCollisions() {
         glow->removeFromParentAndCleanup(true);
         hideHealthPopup();
 
-        image->setVisible(false);
+        getObjectImage()->setVisible(false);
 
         spawnExplosionParticles();
 

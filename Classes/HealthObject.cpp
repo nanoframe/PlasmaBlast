@@ -111,6 +111,10 @@ Rect HealthObject::getBoundingBox() const {
     return boundingBox;
 }
 
+Sprite* HealthObject::getObjectImage() const {
+    return objectImage;
+}
+
 void HealthObject::setObjectImage(Sprite *image) {
     if (objectImage) {
         objectImage->removeFromParentAndCleanup(true);

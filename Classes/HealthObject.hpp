@@ -88,6 +88,7 @@ public:
     virtual const cocos2d::Size& getContentSize() const;
     virtual cocos2d::Rect getBoundingBox() const;
 
+    cocos2d::Sprite* getObjectImage() const;
 protected:
     void setObjectImage(cocos2d::Sprite *image);
 

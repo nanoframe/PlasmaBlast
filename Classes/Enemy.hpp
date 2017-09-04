@@ -53,7 +53,6 @@ public:
 
 
 private:
-    cocos2d::Sprite *image;
     cocos2d::Sprite *glow;
     bool canUpdate = true;
 
