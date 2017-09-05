@@ -10,6 +10,8 @@
 #include "Bullet.hpp"
 #include "HealthObject.hpp"
 
+class GameScore;
+
 class GameScene : public cocos2d::LayerColor {
 public:
     static cocos2d::Scene* createScene();
@@ -40,6 +42,7 @@ private:
 
     cocos2d::Rect screenBounds;
     Circle playerCircle;
+    GameScore *score;
 
     HealthBar *health;
     cocos2d::Sprite *bulletDirectionIndicator;
@@ -58,6 +61,19 @@ private:
      * Initializes different types of bullets.
      */
     void createBulletParams();
+};
+
+class GameScore : public Observer, public cocos2d::Label {
+public:
+    static constexpr float FONT_SIZE = 32.0f;
+    static GameScore* create();
+
+    GameScore();
+
+    virtual void onNotify(ActionEvent action);
+
+private:
+    int score;
 };
 
 #endif // GameScene_hpp
