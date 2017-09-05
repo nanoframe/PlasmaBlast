@@ -107,6 +107,7 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
 
         if (!object->isActive()) {
             discardedComponents.pushBack(object);
+            subject.notify(ActionEvent::ENEMY_DESTROYED);
         }
 
         // Avoid unneccessary object updates from a deactivated bullet
@@ -162,7 +163,9 @@ void GameScene::createBulletParams() {
 GameScore* GameScore::create() {
     auto gameScore = new GameScore();
     
-    if (gameScore->initWithTTF("123", "SquaresBold.ttf", FONT_SIZE)) {
+    if (gameScore->initWithTTF("0",
+                               "SquaresBold.ttf",
+                               FONT_SIZE)) {
         gameScore->autorelease();
         return gameScore;
     }
@@ -184,6 +187,8 @@ int GameScore::getScore() const {
 }
 
 void GameScore::onNotify(ActionEvent action) {
+    if (action == ActionEvent::ENEMY_DESTROYED) {
 
+    }
 }
 
