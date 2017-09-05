@@ -1,11 +1,11 @@
 #ifndef Observer_hpp
 #define Observer_hpp
 
+#include "EventType.hpp"
+
 class Observer {
 public:
-    virtual void onNotify(int action) = 0;
-
-private:
+    virtual void onNotify(ActionEvent action) = 0;
 
 };
 

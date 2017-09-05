@@ -49,6 +49,8 @@
 		4C8F9A311F5E1F7B0001996F /* Observer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A2C1F5E1F7B0001996F /* Observer.cpp */; };
 		4C8F9A321F5E1F7B0001996F /* Subject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A2E1F5E1F7B0001996F /* Subject.cpp */; };
 		4C8F9A331F5E1F7B0001996F /* Subject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A2E1F5E1F7B0001996F /* Subject.cpp */; };
+		4C8F9A361F5E21AE0001996F /* EventType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A341F5E21AE0001996F /* EventType.cpp */; };
+		4C8F9A371F5E21AE0001996F /* EventType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A341F5E21AE0001996F /* EventType.cpp */; };
 		4CABC9C51F5CDCED00A09ED3 /* attacker-particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */; };
 		4CABC9C61F5CDCED00A09ED3 /* attacker-particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */; };
 		4CC8BF1A1F5649CC006FE5C6 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8BF181F5649CC006FE5C6 /* Circle.cpp */; };
@@ -136,6 +138,8 @@
 		4C8F9A2D1F5E1F7B0001996F /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
 		4C8F9A2E1F5E1F7B0001996F /* Subject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Subject.cpp; sourceTree = "<group>"; };
 		4C8F9A2F1F5E1F7B0001996F /* Subject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Subject.hpp; sourceTree = "<group>"; };
+		4C8F9A341F5E21AE0001996F /* EventType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventType.cpp; sourceTree = "<group>"; };
+		4C8F9A351F5E21AE0001996F /* EventType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EventType.hpp; sourceTree = "<group>"; };
 		4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "attacker-particle.png"; sourceTree = "<group>"; };
 		4CC8BF181F5649CC006FE5C6 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		4CC8BF191F5649CC006FE5C6 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				4CC8BF191F5649CC006FE5C6 /* Circle.hpp */,
 				4C1305AF1F521B9600DF504A /* Enemy.cpp */,
 				4C1305B01F521B9600DF504A /* Enemy.hpp */,
+				4C8F9A341F5E21AE0001996F /* EventType.cpp */,
+				4C8F9A351F5E21AE0001996F /* EventType.hpp */,
 				4CD6AD0E1F5264B300FCA656 /* GameEventListener.cpp */,
 				4CD6AD0F1F5264B300FCA656 /* GameEventListener.hpp */,
 				4C1305B11F521B9600DF504A /* GameScene.cpp */,
@@ -534,6 +540,7 @@
 				4C8F9A301F5E1F7B0001996F /* Observer.cpp in Sources */,
 				4C1305C11F521B9600DF504A /* HealthObject.cpp in Sources */,
 				4C1305C31F521B9600DF504A /* RadialSprite.cpp in Sources */,
+				4C8F9A361F5E21AE0001996F /* EventType.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				4C1305BD1F521B9600DF504A /* GameScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -550,6 +557,7 @@
 				4C8F9A311F5E1F7B0001996F /* Observer.cpp in Sources */,
 				4CC8BF1B1F5649CC006FE5C6 /* Circle.cpp in Sources */,
 				4C1305C01F521B9600DF504A /* HealthBar.cpp in Sources */,
+				4C8F9A371F5E21AE0001996F /* EventType.cpp in Sources */,
 				4C1305BC1F521B9600DF504A /* Enemy.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				4C1305BA1F521B9600DF504A /* Bullet.cpp in Sources */,
