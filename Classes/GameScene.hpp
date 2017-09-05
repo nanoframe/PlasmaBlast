@@ -2,6 +2,7 @@
 #define GameScene_hpp
 
 #include "cocos2d.h"
+#include "Subject.hpp"
 #include "GameEventListener.hpp"
 #include "HealthBar.hpp"
 #include "Circle.hpp"
@@ -34,6 +35,7 @@ public:
     CREATE_FUNC(GameScene);
 
 private:
+    Subject subject;
     GameEventListener *eventListener;
 
     cocos2d::Rect screenBounds;

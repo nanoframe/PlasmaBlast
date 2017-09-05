@@ -1,5 +1,6 @@
 #include "GameScene.hpp"
 
+#include "EventType.hpp"
 #include "Enemy.hpp"
 
 USING_NS_CC;
@@ -60,6 +61,8 @@ void GameScene::update(float delta) {
             if (enemy->checkForTargetCollisions()) {
                 // Deduct health
                 health->setHealth(health->getHealth() - enemy->getDamage());
+
+                subject.notify(ActionEvent::ENEMY_HIT_PLAYER);
             }
         }
 
@@ -130,6 +133,8 @@ Bullet* GameScene::createBullet(const Vec2 direction) {
     if (direction.x < 0) angle = -angle;
     bulletDirectionIndicator->setRotation(angle);
     bulletDirectionIndicator->setPosition(spawnPosition);
+
+    subject.notify(ActionEvent::FIRE_BULLET);
 
     return bullet;
 }
