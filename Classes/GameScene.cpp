@@ -174,6 +174,15 @@ GameScore* GameScore::create() {
 GameScore::GameScore() : score(0) {
 }
 
+void GameScore::setScore(int newScore) {
+    score = newScore;
+    setString(std::to_string(newScore));
+}
+
+int GameScore::getScore() const {
+    return score;
+}
+
 void GameScore::onNotify(ActionEvent action) {
 
 }

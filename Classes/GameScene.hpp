@@ -70,6 +70,9 @@ public:
 
     GameScore();
 
+    void setScore(int newScore);
+    int getScore() const;
+
     virtual void onNotify(ActionEvent action);
 
 private:
