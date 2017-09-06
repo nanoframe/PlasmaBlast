@@ -172,7 +172,12 @@ void AttackerEnemy::spawnExplosionParticles() {
 
 // ShooterEnemy implementation
 
-ShooterEnemy::ShooterEnemy(float maxHealth) : Enemy(maxHealth, 2.0f) {
+ShooterEnemy::ShooterEnemy(float maxHealth)
+    : Enemy(maxHealth, 2.0f) {
+
+        bool reverse = random<int>(0, 1);
+        // Rotate in a random direction
+        degreeIncrement = ROTATION_INCREMENT * (reverse ? -1.0f : 1.0f);
 }
 
 ShooterEnemy* ShooterEnemy::create(float maxHealth) {
@@ -199,7 +204,56 @@ void ShooterEnemy::initOptions() {
 }
 
 void ShooterEnemy::updateItem(float delta) {
+    // Direction of the enemy towards the player
+    Vec2 playerDirection = -getPosition() + getTarget().getCenter();
 
+    // Move the enemy towards the player
+    if (playerDirection.lengthSquared() >
+            SHOOTING_DISTANCE * SHOOTING_DISTANCE && !isRevolving) {
+        playerDirection.normalize();
+
+        const float SPEED = 10.0f;
+
+        // Calculate the angle the Sprite should rotate to be facing towards
+        // the player
+        Vec2 upVector(0.0f, 1.0f);
+        float angle = MATH_RAD_TO_DEG(acosf(upVector.dot(playerDirection)));
+        if (playerDirection.x < 0) angle = -angle;
+
+        playerDirection *= SPEED;
+
+        getObjectImage()->setRotation(angle);
+        setPosition(getPosition() + playerDirection * delta);
+
+    } else { // Spin around the player
+
+        // Determine which angle to start off with
+        if (!isRevolving) {
+            isRevolving = true;
+
+            // Calculate the angle the enemy is from the right of the target
+            Vec2 enemyTargetDelta = getPosition() -
+                                    getTarget().getCenter();
+            revolvingAngle = atan2f(enemyTargetDelta.y, enemyTargetDelta.x);
+            revolvingAngle = MATH_RAD_TO_DEG(revolvingAngle);
+
+        }
+
+        revolvingAngle += degreeIncrement * delta;
+
+        // Compute the enemy's x-position and y-position
+        float angleRadians = MATH_DEG_TO_RAD(revolvingAngle);
+
+        Vec2 enemyPosition(
+                cosf(angleRadians) * SHOOTING_DISTANCE,
+                sinf(angleRadians) * SHOOTING_DISTANCE);
+        enemyPosition += getTarget().getCenter();
+
+        // Convert degrees from 0-right CCW to 0-up CW
+        getObjectImage()->setRotation(-revolvingAngle - 90.0f);
+
+        setPosition(enemyPosition);
+    }
 }
 
 bool ShooterEnemy::checkForTargetCollisions() {

@@ -63,6 +63,11 @@ private:
 
 class ShooterEnemy : public Enemy {
 public:
+    const float SHOOTING_DISTANCE = 100.0f; // Distance away from the target to
+                                            // begin shooting
+    const float ROTATION_INCREMENT = 15.0f; // Degrees to increment every
+                                            // second while shooting
+
     ShooterEnemy(float maxHealth);
 
     static ShooterEnemy* create(float maxHealth);
@@ -75,6 +80,10 @@ public:
 
 private:
     cocos2d::Sprite *glow;
+
+    bool isRevolving = false;
+    float revolvingAngle = 0.0f;
+    float degreeIncrement;
 };
 
 #endif // Enemy_hpp
