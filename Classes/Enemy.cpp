@@ -170,3 +170,43 @@ void AttackerEnemy::spawnExplosionParticles() {
     }
 }
 
+// ShooterEnemy implementation
+
+ShooterEnemy::ShooterEnemy(float maxHealth) : Enemy(maxHealth, 2.0f) {
+}
+
+ShooterEnemy* ShooterEnemy::create(float maxHealth) {
+    auto enemy = new ShooterEnemy(maxHealth);
+
+    if (enemy->init()) {
+        enemy->autorelease();
+        enemy->initOptions();
+        return enemy;
+    }
+
+    CC_SAFE_DELETE(enemy);
+    return nullptr;
+}
+
+void ShooterEnemy::initOptions() {
+    auto image = Sprite::create("shooter.png");
+    auto glow = Sprite::create("shooter-glow.png");
+    glow->setPosition(image->getContentSize() / 2.0f);
+
+    image->addChild(glow);
+
+    setObjectImage(image);
+}
+
+void ShooterEnemy::updateItem(float delta) {
+
+}
+
+bool ShooterEnemy::checkForTargetCollisions() {
+
+}
+
+void ShooterEnemy::onDestroyItem() {
+
+}
+
