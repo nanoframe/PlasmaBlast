@@ -31,6 +31,11 @@ bool GameScene::init() {
     bulletDirectionIndicator->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
     addChild(bulletDirectionIndicator, 1);
 
+    score = GameScore::create();
+    score->setPosition(playerCircle.getCenter());
+    addChild(score, 1);
+    subject.addObserver(score);
+
     setupTouchListener();
     createBulletParams();
 
@@ -102,6 +107,7 @@ void GameScene::updateComponents(float delta, Bullet *bullet) {
 
         if (!object->isActive()) {
             discardedComponents.pushBack(object);
+            subject.notify(ActionEvent::ENEMY_DESTROYED);
         }
 
         // Avoid unneccessary object updates from a deactivated bullet
@@ -150,5 +156,39 @@ void GameScene::createBulletParams() {
     // Scale, velocity, damage
 
     normalBullet = {1.0f, 110.0f, 10.0f};
+}
+
+// GameScore implementation
+
+GameScore* GameScore::create() {
+    auto gameScore = new GameScore();
+    
+    if (gameScore->initWithTTF("0",
+                               "SquaresBold.ttf",
+                               FONT_SIZE)) {
+        gameScore->autorelease();
+        return gameScore;
+    }
+
+    CC_SAFE_DELETE(gameScore);
+    return nullptr;
+}
+
+GameScore::GameScore() : score(0) {
+}
+
+void GameScore::setScore(int newScore) {
+    score = newScore;
+    setString(std::to_string(newScore));
+}
+
+int GameScore::getScore() const {
+    return score;
+}
+
+void GameScore::onNotify(ActionEvent action) {
+    if (action == ActionEvent::ENEMY_DESTROYED) {
+
+    }
 }
 

@@ -35,6 +35,8 @@
 		4C1305D11F521BA600DF504A /* ring-outline-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1305C81F521BA600DF504A /* ring-outline-glow.png */; };
 		4C1305D21F521BA600DF504A /* ring-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1305C91F521BA600DF504A /* ring-outline.png */; };
 		4C1305D31F521BA600DF504A /* ring-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1305C91F521BA600DF504A /* ring-outline.png */; };
+		4C3E1E081F5E426500215626 /* SquaresBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E1E071F5E426500215626 /* SquaresBold.ttf */; };
+		4C3E1E091F5E426500215626 /* SquaresBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C3E1E071F5E426500215626 /* SquaresBold.ttf */; };
 		4C4126D81F3F992500034768 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4126D71F3F992500034768 /* libcocos2d iOS.a */; };
 		4C4126DA1F3F993A00034768 /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4126D91F3F993A00034768 /* libcocos2d Mac.a */; };
 		4C6A84361F5362F500F40241 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6A84351F5362F500F40241 /* bullet.png */; };
@@ -128,6 +130,7 @@
 		4C1305C71F521BA600DF504A /* health-ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "health-ring.png"; sourceTree = "<group>"; };
 		4C1305C81F521BA600DF504A /* ring-outline-glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ring-outline-glow.png"; sourceTree = "<group>"; };
 		4C1305C91F521BA600DF504A /* ring-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ring-outline.png"; sourceTree = "<group>"; };
+		4C3E1E071F5E426500215626 /* SquaresBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SquaresBold.ttf; sourceTree = "<group>"; };
 		4C4126D71F3F992500034768 /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/ios/libcocos2d iOS.a"; sourceTree = "<group>"; };
 		4C4126D91F3F993A00034768 /* libcocos2d Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d Mac.a"; path = "../../../../.local/cocos2d-x-3.15.1/prebuilt/mac/libcocos2d Mac.a"; sourceTree = "<group>"; };
 		4C6A84351F5362F500F40241 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
@@ -315,6 +318,7 @@
 				4C1305C71F521BA600DF504A /* health-ring.png */,
 				4C1305C81F521BA600DF504A /* ring-outline-glow.png */,
 				4C1305C91F521BA600DF504A /* ring-outline.png */,
+				4C3E1E071F5E426500215626 /* SquaresBold.ttf */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -487,6 +491,7 @@
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				4C1305CC1F521BA600DF504A /* health-progress.png in Resources */,
+				4C3E1E081F5E426500215626 /* SquaresBold.ttf in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				4C6A84361F5362F500F40241 /* bullet.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
@@ -517,6 +522,7 @@
 				4C1305CF1F521BA600DF504A /* health-ring.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				4C6A950E1F53A6D900B40299 /* attacker.png in Resources */,
+				4C3E1E091F5E426500215626 /* SquaresBold.ttf in Resources */,
 				4C1305D11F521BA600DF504A /* ring-outline-glow.png in Resources */,
 				4C1305CB1F521BA600DF504A /* health-frame.png in Resources */,
 				4C6DF0091F5481890074C27C /* direction-indicator.png in Resources */,
