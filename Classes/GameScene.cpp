@@ -29,6 +29,10 @@ bool GameScene::init() {
 
     bulletDirectionIndicator = Sprite::create("direction-indicator.png");
     bulletDirectionIndicator->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    // Start with the indicator pointing up
+    bulletDirectionIndicator->setPosition(playerCircle.getCenterX(),
+                                          playerCircle.getCenterY() +
+                                                playerCircle.getRadius());
     addChild(bulletDirectionIndicator, 1);
 
     score = GameScore::create();
