@@ -35,6 +35,8 @@ public:
      */
     void setTarget(Circle &targetCircle);
 
+    void spawnExplosionParticles(const cocos2d::Vec2 &direction);
+
 private:
     Circle target;
     float damage;
@@ -55,11 +57,6 @@ public:
 private:
     cocos2d::Sprite *glow;
     bool canUpdate = true;
-
-    /**
-     * Spawn explosion particles moving away from the target.
-     */
-    void spawnExplosionParticles();
 };
 
 class ShooterEnemy : public Enemy {
