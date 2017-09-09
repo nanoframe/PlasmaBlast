@@ -78,6 +78,9 @@ public:
     virtual bool checkForTargetCollisions();
     virtual void onDestroyItem();
 
+    void updatePosition(float delta);
+    void updateAttack(float delta);
+
 private:
     cocos2d::Sprite *glow;
 

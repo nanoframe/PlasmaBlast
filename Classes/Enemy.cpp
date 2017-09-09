@@ -204,6 +204,11 @@ void ShooterEnemy::initOptions() {
 }
 
 void ShooterEnemy::updateItem(float delta) {
+    updatePosition(delta);
+    if (isRevolving) updateAttack(delta);
+}
+
+void ShooterEnemy::updatePosition(float delta) {
     // Direction of the enemy towards the player
     Vec2 playerDirection = -getPosition() + getTarget().getCenter();
 
@@ -256,8 +261,12 @@ void ShooterEnemy::updateItem(float delta) {
     }
 }
 
-bool ShooterEnemy::checkForTargetCollisions() {
+void ShooterEnemy::updateAttack(float delta) {
+    
+}
 
+bool ShooterEnemy::checkForTargetCollisions() {
+    return false;
 }
 
 void ShooterEnemy::onDestroyItem() {
