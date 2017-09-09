@@ -319,6 +319,9 @@ bool ShooterEnemy::checkForTargetCollisions() {
 }
 
 void ShooterEnemy::onDestroyItem() {
-
+    for (Bullet *bullet : bullets) {
+        bullet->removeFromParentAndCleanup(true);
+    }
+    bullets.clear();
 }
 
