@@ -298,7 +298,24 @@ void ShooterEnemy::updateAttack(float delta) {
 }
 
 bool ShooterEnemy::checkForTargetCollisions() {
-    return false;
+    bool isHit = false;
+    Vector<Bullet*> disposedBullets;
+
+    for (Bullet *bullet : bullets) {
+        // The bullet hit the target
+        if (getTarget().intersectsRect(bullet->getBoundingBox())) {
+            disposedBullets.pushBack(bullet);
+            isHit = true;
+        }
+    }
+
+    // Remove disposed bullets
+    for (Bullet *disposed : disposedBullets) {
+        disposed->removeFromParentAndCleanup(true);
+        bullets.eraseObject(disposed);
+    }
+
+    return isHit;
 }
 
 void ShooterEnemy::onDestroyItem() {
