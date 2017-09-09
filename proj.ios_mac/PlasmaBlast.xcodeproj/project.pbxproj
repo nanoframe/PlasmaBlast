@@ -53,6 +53,10 @@
 		4C8F9A331F5E1F7B0001996F /* Subject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A2E1F5E1F7B0001996F /* Subject.cpp */; };
 		4C8F9A361F5E21AE0001996F /* EventType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A341F5E21AE0001996F /* EventType.cpp */; };
 		4C8F9A371F5E21AE0001996F /* EventType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F9A341F5E21AE0001996F /* EventType.cpp */; };
+		4C9F0AA41F5F8B5800B6EA32 /* shooter-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C9F0AA21F5F8B5800B6EA32 /* shooter-glow.png */; };
+		4C9F0AA51F5F8B5800B6EA32 /* shooter-glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C9F0AA21F5F8B5800B6EA32 /* shooter-glow.png */; };
+		4C9F0AA61F5F8B5800B6EA32 /* shooter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C9F0AA31F5F8B5800B6EA32 /* shooter.png */; };
+		4C9F0AA71F5F8B5800B6EA32 /* shooter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C9F0AA31F5F8B5800B6EA32 /* shooter.png */; };
 		4CABC9C51F5CDCED00A09ED3 /* attacker-particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */; };
 		4CABC9C61F5CDCED00A09ED3 /* attacker-particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */; };
 		4CC8BF1A1F5649CC006FE5C6 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CC8BF181F5649CC006FE5C6 /* Circle.cpp */; };
@@ -143,6 +147,8 @@
 		4C8F9A2F1F5E1F7B0001996F /* Subject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Subject.hpp; sourceTree = "<group>"; };
 		4C8F9A341F5E21AE0001996F /* EventType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventType.cpp; sourceTree = "<group>"; };
 		4C8F9A351F5E21AE0001996F /* EventType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EventType.hpp; sourceTree = "<group>"; };
+		4C9F0AA21F5F8B5800B6EA32 /* shooter-glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shooter-glow.png"; sourceTree = "<group>"; };
+		4C9F0AA31F5F8B5800B6EA32 /* shooter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shooter.png; sourceTree = "<group>"; };
 		4CABC9C41F5CDCED00A09ED3 /* attacker-particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "attacker-particle.png"; sourceTree = "<group>"; };
 		4CC8BF181F5649CC006FE5C6 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		4CC8BF191F5649CC006FE5C6 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
@@ -318,6 +324,8 @@
 				4C1305C71F521BA600DF504A /* health-ring.png */,
 				4C1305C81F521BA600DF504A /* ring-outline-glow.png */,
 				4C1305C91F521BA600DF504A /* ring-outline.png */,
+				4C9F0AA21F5F8B5800B6EA32 /* shooter-glow.png */,
+				4C9F0AA31F5F8B5800B6EA32 /* shooter.png */,
 				4C3E1E071F5E426500215626 /* SquaresBold.ttf */,
 			);
 			name = Resources;
@@ -493,8 +501,10 @@
 				4C1305CC1F521BA600DF504A /* health-progress.png in Resources */,
 				4C3E1E081F5E426500215626 /* SquaresBold.ttf in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				4C9F0AA61F5F8B5800B6EA32 /* shooter.png in Resources */,
 				4C6A84361F5362F500F40241 /* bullet.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				4C9F0AA41F5F8B5800B6EA32 /* shooter-glow.png in Resources */,
 				4C1305CE1F521BA600DF504A /* health-ring.png in Resources */,
 				4C6A950D1F53A6D900B40299 /* attacker.png in Resources */,
 				4C6DF0081F5480430074C27C /* direction-indicator.png in Resources */,
@@ -522,10 +532,12 @@
 				4C1305CF1F521BA600DF504A /* health-ring.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				4C6A950E1F53A6D900B40299 /* attacker.png in Resources */,
+				4C9F0AA71F5F8B5800B6EA32 /* shooter.png in Resources */,
 				4C3E1E091F5E426500215626 /* SquaresBold.ttf in Resources */,
 				4C1305D11F521BA600DF504A /* ring-outline-glow.png in Resources */,
 				4C1305CB1F521BA600DF504A /* health-frame.png in Resources */,
 				4C6DF0091F5481890074C27C /* direction-indicator.png in Resources */,
+				4C9F0AA51F5F8B5800B6EA32 /* shooter-glow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

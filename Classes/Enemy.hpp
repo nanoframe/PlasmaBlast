@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "HealthObject.hpp"
+#include "Bullet.hpp"
 #include "Circle.hpp"
 
 class Enemy : public HealthObject {
@@ -51,7 +52,6 @@ public:
     virtual bool checkForTargetCollisions();
     virtual void onDestroyItem();
 
-
 private:
     cocos2d::Sprite *glow;
     bool canUpdate = true;
@@ -60,6 +60,40 @@ private:
      * Spawn explosion particles moving away from the target.
      */
     void spawnExplosionParticles();
+};
+
+class ShooterEnemy : public Enemy {
+public:
+    const float SHOOTING_DISTANCE = 100.0f; // Distance away from the target to
+                                            // begin shooting
+    const float ROTATION_INCREMENT = 15.0f; // Degrees to increment every
+                                            // second while shooting
+    const float SHOOTING_DELAY = 0.8f; // In seconds
+
+    ShooterEnemy(float maxHealth);
+
+    static ShooterEnemy* create(float maxHealth);
+
+    void initOptions();
+
+    virtual void updateItem(float delta);
+    virtual bool checkForTargetCollisions();
+    virtual void onDestroyItem();
+
+    void updatePosition(float delta);
+    void updateAttack(float delta);
+
+private:
+    static Bullet::BulletParams SHOOTER_BULLET_PARAMS;
+
+    cocos2d::Sprite *glow;
+    cocos2d::Vector<Bullet*> bullets;
+
+    bool isRevolving = false;
+    float revolvingAngle = 0.0f;
+    float degreeIncrement;
+
+    float bulletTime = SHOOTING_DELAY;
 };
 
 #endif // Enemy_hpp
