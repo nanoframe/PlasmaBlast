@@ -172,6 +172,12 @@ void AttackerEnemy::spawnExplosionParticles() {
 
 // ShooterEnemy implementation
 
+Bullet::BulletParams ShooterEnemy::SHOOTER_BULLET_PARAMS = {
+    0.5f,  // Scale
+    70.0f, // Velocity
+    5.0f   // Damage
+};
+
 ShooterEnemy::ShooterEnemy(float maxHealth)
     : Enemy(maxHealth, 2.0f) {
 
@@ -262,7 +268,33 @@ void ShooterEnemy::updatePosition(float delta) {
 }
 
 void ShooterEnemy::updateAttack(float delta) {
-    
+    bulletTime += delta;
+    // Spawn bullets if the time exceeds the threshold
+    if (bulletTime >= SHOOTING_DELAY) {
+        bulletTime = 0.0f;
+
+        // Calculate the direction of the enemy towards the target
+        Vec2 direction = getTarget().getCenter() - getPosition();
+        direction.normalize();
+
+        auto bullet = Bullet::create(SHOOTER_BULLET_PARAMS, direction);
+        bullet->setPosition(getPosition());
+        bullets.pushBack(bullet);
+        getParent()->addChild(bullet);
+    }
+
+    // Update bullets
+    for (Bullet *bullet : bullets) {
+        bullet->update(delta);
+
+        /*
+         * There is a chance where the bullet will "magically" miss and shoot
+         * outside of the screen. This isn't a big issue because although
+         * there may be unneccessary updates, the bullet will be disposed
+         * once the enemy is destroyed.
+         */
+    }
+
 }
 
 bool ShooterEnemy::checkForTargetCollisions() {

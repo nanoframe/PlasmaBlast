@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "HealthObject.hpp"
+#include "Bullet.hpp"
 #include "Circle.hpp"
 
 class Enemy : public HealthObject {
@@ -67,6 +68,7 @@ public:
                                             // begin shooting
     const float ROTATION_INCREMENT = 15.0f; // Degrees to increment every
                                             // second while shooting
+    const float SHOOTING_DELAY = 0.8f; // In seconds
 
     ShooterEnemy(float maxHealth);
 
@@ -82,11 +84,16 @@ public:
     void updateAttack(float delta);
 
 private:
+    static Bullet::BulletParams SHOOTER_BULLET_PARAMS;
+
     cocos2d::Sprite *glow;
+    cocos2d::Vector<Bullet*> bullets;
 
     bool isRevolving = false;
     float revolvingAngle = 0.0f;
     float degreeIncrement;
+
+    float bulletTime = SHOOTING_DELAY;
 };
 
 #endif // Enemy_hpp
