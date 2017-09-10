@@ -32,16 +32,16 @@ void Enemy::setTarget(Circle& targetCircle) {
     target = targetCircle;
 }
 
-void Enemy::spawnExplosionParticles(const Vec2 &direction) {
+void Enemy::spawnExplosionParticles(const Vec2 &direction,
+                                    const int particleCount/* = 30*/) {
     const float DISTANCE_MIN = 10.0f;
     const float DISTANCE_MAX = 50.0f;
     const float DURATION_MIN = 0.5f;
     const float DURATION_MAX = 1.7f;
-    const int PARTICLE_COUNT = 30;
     const float SPAWN_OFFSET = 5.0f;
     const float DIRECTION_OFFSET = 18.0f;
 
-    for (int i = 0; i < PARTICLE_COUNT; i++) {
+    for (int i = 0; i < particleCount; i++) {
         // Random spawn position
         Vec2 spawnPosition = Vec2(random<float>(-SPAWN_OFFSET,
                                                 SPAWN_OFFSET),

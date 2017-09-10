@@ -35,7 +35,8 @@ public:
      */
     void setTarget(Circle &targetCircle);
 
-    void spawnExplosionParticles(const cocos2d::Vec2 &direction);
+    void spawnExplosionParticles(const cocos2d::Vec2 &direction,
+                                 const int particleCount = 30);
 
 private:
     Circle target;
