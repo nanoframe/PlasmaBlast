@@ -9,6 +9,17 @@ Enemy::Enemy(float maxHealth, float enemyDamage)
       damage(enemyDamage){
 }
 
+void Enemy::onDestroyItem() {
+    spawnExplosionParticles(Vec2::ZERO);
+    auto delayAction = DelayTime::create(2.5f);
+    auto disposeAction = CallFunc::create([this]() {
+        removeFromParentAndCleanup(true);
+    });
+    runAction(Sequence::create(delayAction,
+                               disposeAction,
+                               nullptr));
+}
+
 float Enemy::getDamage() const {
     return damage;
 }
@@ -20,6 +31,55 @@ const Circle& Enemy::getTarget() const {
 void Enemy::setTarget(Circle& targetCircle) {
     target = targetCircle;
 }
+
+void Enemy::spawnExplosionParticles(const Vec2 &direction,
+                                    const int particleCount/* = 30*/) {
+    const float DISTANCE_MIN = 10.0f;
+    const float DISTANCE_MAX = 50.0f;
+    const float DURATION_MIN = 0.5f;
+    const float DURATION_MAX = 1.7f;
+    const float SPAWN_OFFSET = 5.0f;
+    const float DIRECTION_OFFSET = 18.0f;
+
+    for (int i = 0; i < particleCount; i++) {
+        // Random spawn position
+        Vec2 spawnPosition = Vec2(random<float>(-SPAWN_OFFSET,
+                                                SPAWN_OFFSET),
+                                  random<float>(-SPAWN_OFFSET,
+                                                SPAWN_OFFSET));
+
+        float duration = random<float>(DURATION_MIN, DURATION_MAX);
+        Vec2 randomDirection = direction;
+
+        // Random distance
+        randomDirection *= random<float>(DISTANCE_MIN,
+                                   DISTANCE_MAX);
+
+        // Random movement
+        randomDirection.x += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
+        randomDirection.y += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
+
+        // Create the particle
+        auto particle = Sprite::create("attacker-particle.png");
+        particle->setPosition(spawnPosition);
+        addChild(particle);
+
+        // Create particle actions
+        auto movementAction = MoveBy::create(duration,
+                                             randomDirection);
+        auto fadeAction = FadeOut::create(0.5f);
+        auto disposeAction = CallFunc::create([particle]() {
+                particle->removeFromParentAndCleanup(true);
+        });
+        auto sequenceAction = Sequence::create(EaseOut::create(movementAction,
+                                                               2.0f),
+                                               fadeAction,
+                                               disposeAction,
+                                               nullptr);
+        particle->runAction(sequenceAction);
+    }
+}
+
 
 // AttackerEnemy implementation
 
@@ -80,11 +140,14 @@ bool AttackerEnemy::checkForTargetCollisions() {
         glow->removeFromParentAndCleanup(true);
         hideHealthPopup();
         getObjectImage()->setVisible(false);
-
         // Disable bullet updates
         setIsActive(false);
 
-        spawnExplosionParticles();
+        // Spawn explosion particles
+        Vec2 direction = -getPosition() + getTarget().getCenter();
+        direction.negate();
+        direction.normalize();
+        spawnExplosionParticles(direction);
 
         // Dispose after two seconds
         scheduleOnce([this](float) { removeFromParentAndCleanup(true); },
@@ -98,76 +161,11 @@ bool AttackerEnemy::checkForTargetCollisions() {
 }
 
 void AttackerEnemy::onDestroyItem() {
-    glow->removeFromParentAndCleanup(true);
+    // Hide the enemy
+    getObjectImage()->setVisible(false);
+    glow->setVisible(false);
 
-    const float ACTION_DURATION = 1.2f;
-    const float MAX_MOVEMENT = 20.0f;
-    Vec2 movement = Vec2(random<float>(-MAX_MOVEMENT, MAX_MOVEMENT),
-                         random<float>(-MAX_MOVEMENT, MAX_MOVEMENT));
-
-    auto rotateAction = RotateBy::create(ACTION_DURATION,
-                                         random<float>(180.0f, 540.0f));
-    auto moveAction = MoveBy::create(ACTION_DURATION, movement);
-    auto destroyAction = Spawn::create(EaseOut::create(rotateAction, 2.0f),
-                                       EaseOut::create(moveAction, 2.0f),
-                                       nullptr);
-    auto fullAction = Sequence::create(destroyAction,
-                                       DelayTime::create(0.4f),
-                                       CallFunc::create([this]() {
-                                           removeFromParentAndCleanup(true);
-                                       }),
-                                       nullptr);
-    runAction(fullAction);
-}
-
-void AttackerEnemy::spawnExplosionParticles() {
-    const float DISTANCE_MIN = 10.0f;
-    const float DISTANCE_MAX = 50.0f;
-    const float DURATION_MIN = 0.5f;
-    const float DURATION_MAX = 1.7f;
-    const float DIRECTION_OFFSET = 35.0f;
-    const int PARTICLE_COUNT = 30.0f;
-    const float SPAWN_OFFSET = 5.0f;
-
-    for (int i = 0; i < PARTICLE_COUNT; i++) {
-        // Spawn moving in a random direction
-        Vec2 direction = -getPosition() + getTarget().getCenter();
-        direction.negate();
-        direction.x += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
-        direction.y += random<float>(-DIRECTION_OFFSET, DIRECTION_OFFSET);
-        direction.normalize();
-
-        // Random spawn position
-        Vec2 spawnPosition = Vec2(random<float>(-SPAWN_OFFSET,
-                                                SPAWN_OFFSET),
-                                  random<float>(-SPAWN_OFFSET,
-                                                SPAWN_OFFSET));
-
-        float duration = random<float>(DURATION_MIN, DURATION_MAX);
-
-        // Random distance
-        direction *= random<float>(DISTANCE_MIN,
-                                   DISTANCE_MAX);
-
-        // Create the particle
-        auto particle = Sprite::create("attacker-particle.png");
-        particle->setPosition(spawnPosition);
-        addChild(particle);
-
-        // Create particle actions
-        auto movementAction = MoveBy::create(duration,
-                                             direction);
-        auto fadeAction = FadeOut::create(0.5f);
-        auto disposeAction = CallFunc::create([particle]() {
-                particle->removeFromParentAndCleanup(true);
-        });
-        auto sequenceAction = Sequence::create(EaseOut::create(movementAction,
-                                                               2.0f),
-                                               fadeAction,
-                                               disposeAction,
-                                               nullptr);
-        particle->runAction(sequenceAction);
-    }
+    Enemy::onDestroyItem();
 }
 
 // ShooterEnemy implementation
@@ -324,26 +322,10 @@ void ShooterEnemy::onDestroyItem() {
     }
     bullets.clear();
 
-    glow->removeFromParentAndCleanup(true);
+    // Hide the enemy
+    getObjectImage()->setVisible(false);
+    glow->setVisible(false);
 
-    const float ACTION_DURATION = 1.2f;
-    const float MAX_MOVEMENT = 20.0f;
-    Vec2 movement = Vec2(random<float>(-MAX_MOVEMENT, MAX_MOVEMENT),
-                         random<float>(-MAX_MOVEMENT, MAX_MOVEMENT));
-
-    auto rotateAction = RotateBy::create(ACTION_DURATION,
-                                         random<float>(180.0f, 540.0f));
-    auto moveAction = MoveBy::create(ACTION_DURATION, movement);
-    auto destroyAction = Spawn::create(EaseOut::create(rotateAction, 2.0f),
-                                       EaseOut::create(moveAction, 2.0f),
-                                       nullptr);
-    auto fullAction = Sequence::create(destroyAction,
-                                       DelayTime::create(0.4f),
-                                       CallFunc::create([this]() {
-                                           removeFromParentAndCleanup(true);
-                                       }),
-                                       nullptr);
-    runAction(fullAction);
-
+    Enemy::onDestroyItem();
 }
 

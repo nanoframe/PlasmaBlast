@@ -12,7 +12,7 @@ public:
 
     virtual void updateItem(float delta) = 0;
     virtual bool checkForTargetCollisions() = 0;
-    virtual void onDestroyItem() = 0;
+    virtual void onDestroyItem();
 
     /**
      * Returns the amount of health the enemy will deduct from the player.
@@ -35,6 +35,9 @@ public:
      */
     void setTarget(Circle &targetCircle);
 
+    void spawnExplosionParticles(const cocos2d::Vec2 &direction,
+                                 const int particleCount = 30);
+
 private:
     Circle target;
     float damage;
@@ -55,11 +58,6 @@ public:
 private:
     cocos2d::Sprite *glow;
     bool canUpdate = true;
-
-    /**
-     * Spawn explosion particles moving away from the target.
-     */
-    void spawnExplosionParticles();
 };
 
 class ShooterEnemy : public Enemy {
