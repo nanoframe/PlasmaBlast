@@ -12,7 +12,7 @@ public:
 
     virtual void updateItem(float delta) = 0;
     virtual bool checkForTargetCollisions() = 0;
-    virtual void onDestroyItem() = 0;
+    virtual void onDestroyItem();
 
     /**
      * Returns the amount of health the enemy will deduct from the player.

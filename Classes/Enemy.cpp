@@ -9,6 +9,17 @@ Enemy::Enemy(float maxHealth, float enemyDamage)
       damage(enemyDamage){
 }
 
+void Enemy::onDestroyItem() {
+    spawnExplosionParticles(Vec2::ZERO);
+    auto delayAction = DelayTime::create(2.5f);
+    auto disposeAction = CallFunc::create([this]() {
+        removeFromParentAndCleanup(true);
+    });
+    runAction(Sequence::create(delayAction,
+                               disposeAction,
+                               nullptr));
+}
+
 float Enemy::getDamage() const {
     return damage;
 }
@@ -150,26 +161,11 @@ bool AttackerEnemy::checkForTargetCollisions() {
 }
 
 void AttackerEnemy::onDestroyItem() {
-    glow->removeFromParentAndCleanup(true);
+    // Hide the enemy
+    getObjectImage()->setVisible(false);
+    glow->setVisible(false);
 
-    const float ACTION_DURATION = 1.2f;
-    const float MAX_MOVEMENT = 20.0f;
-    Vec2 movement = Vec2(random<float>(-MAX_MOVEMENT, MAX_MOVEMENT),
-                         random<float>(-MAX_MOVEMENT, MAX_MOVEMENT));
-
-    auto rotateAction = RotateBy::create(ACTION_DURATION,
-                                         random<float>(180.0f, 540.0f));
-    auto moveAction = MoveBy::create(ACTION_DURATION, movement);
-    auto destroyAction = Spawn::create(EaseOut::create(rotateAction, 2.0f),
-                                       EaseOut::create(moveAction, 2.0f),
-                                       nullptr);
-    auto fullAction = Sequence::create(destroyAction,
-                                       DelayTime::create(0.4f),
-                                       CallFunc::create([this]() {
-                                           removeFromParentAndCleanup(true);
-                                       }),
-                                       nullptr);
-    runAction(fullAction);
+    Enemy::onDestroyItem();
 }
 
 // ShooterEnemy implementation
@@ -326,26 +322,10 @@ void ShooterEnemy::onDestroyItem() {
     }
     bullets.clear();
 
-    glow->removeFromParentAndCleanup(true);
+    // Hide the enemy
+    getObjectImage()->setVisible(false);
+    glow->setVisible(false);
 
-    const float ACTION_DURATION = 1.2f;
-    const float MAX_MOVEMENT = 20.0f;
-    Vec2 movement = Vec2(random<float>(-MAX_MOVEMENT, MAX_MOVEMENT),
-                         random<float>(-MAX_MOVEMENT, MAX_MOVEMENT));
-
-    auto rotateAction = RotateBy::create(ACTION_DURATION,
-                                         random<float>(180.0f, 540.0f));
-    auto moveAction = MoveBy::create(ACTION_DURATION, movement);
-    auto destroyAction = Spawn::create(EaseOut::create(rotateAction, 2.0f),
-                                       EaseOut::create(moveAction, 2.0f),
-                                       nullptr);
-    auto fullAction = Sequence::create(destroyAction,
-                                       DelayTime::create(0.4f),
-                                       CallFunc::create([this]() {
-                                           removeFromParentAndCleanup(true);
-                                       }),
-                                       nullptr);
-    runAction(fullAction);
-
+    Enemy::onDestroyItem();
 }
 
