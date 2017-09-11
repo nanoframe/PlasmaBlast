@@ -190,7 +190,7 @@ int GameScore::getScore() const {
     return score;
 }
 
-void GameScore::onNotify(ActionEvent action) {
+void GameScore::onNotify(ActionEvent action, int data) {
     if (action == ActionEvent::ENEMY_DESTROYED) {
 
     }

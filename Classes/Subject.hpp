@@ -16,7 +16,7 @@ public:
     Observer* removeObserver(Observer *observer);
 
 protected:
-    void notify(ActionEvent action);
+    void notify(ActionEvent action, int data = -1);
 
 private:
     std::vector<Observer*> observers;

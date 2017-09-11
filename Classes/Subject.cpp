@@ -20,9 +20,9 @@ Observer* Subject::removeObserver(Observer *observer) {
     return nullptr;
 }
 
-void Subject::notify(ActionEvent action) {
+void Subject::notify(ActionEvent action, int data/* = -1*/) {
     for (auto it = observers.begin(); it != observers.end(); it++) {
-        (*it)->onNotify(action);
+        (*it)->onNotify(action, data);
     }
 }
 

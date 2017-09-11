@@ -73,7 +73,7 @@ public:
     void setScore(int newScore);
     int getScore() const;
 
-    virtual void onNotify(ActionEvent action);
+    virtual void onNotify(ActionEvent action, int data);
 
 private:
     int score;

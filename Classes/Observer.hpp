@@ -5,7 +5,7 @@
 
 class Observer {
 public:
-    virtual void onNotify(ActionEvent action) = 0;
+    virtual void onNotify(ActionEvent action, int data) = 0;
 
 };
 
