@@ -14,7 +14,7 @@ Scene* GameScene::createScene() {
 }
 
 bool GameScene::init() {
-    if (!LayerColor::initWithColor(Color4B(25, 25, 25, 255))) return false;
+    if (!LayerColor::initWithColor(Color4B(19, 19, 19, 255))) return false;
 
     auto screenSize = Director::getInstance()->getVisibleSize();
 
@@ -44,6 +44,18 @@ bool GameScene::init() {
     createBulletParams();
 
     scheduleUpdate();
+
+    Enemy *enemy = ShooterEnemy::create(100.0f);
+    enemy->setPosition(50, 200.0f);
+    enemy->setTarget(playerCircle);
+    objects.pushBack(enemy);
+    addChild(enemy);
+
+    enemy = AttackerEnemy::create(100.0f);
+    enemy->setPosition(300, 200.0f);
+    enemy->setTarget(playerCircle);
+    objects.pushBack(enemy);
+    addChild(enemy);
 
     return true;
 }
