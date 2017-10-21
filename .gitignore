@@ -49,3 +49,4 @@ out/
 cocos2d
 linux-build
 *.swp
+*.afdesign
