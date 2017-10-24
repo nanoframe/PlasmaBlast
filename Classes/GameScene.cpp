@@ -1,5 +1,6 @@
 #include "GameScene.hpp"
 
+#include "Background.hpp"
 #include "EventType.hpp"
 #include "Enemy.hpp"
 
@@ -19,6 +20,9 @@ bool GameScene::init() {
     auto screenSize = Director::getInstance()->getVisibleSize();
 
     screenBounds = Rect(Vec2::ZERO, screenSize);
+
+    auto background = Background::create();
+    addChild(background);
 
     health = HealthBar::create();
     health->setPosition(screenSize / 2.0f);
